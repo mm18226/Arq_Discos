@@ -32,9 +32,9 @@ public class formPrincipal extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        btn_equipo = new javax.swing.JButton();
-        btn_busqueda = new javax.swing.JButton();
-        btn_planificacion = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -54,63 +54,80 @@ public class formPrincipal extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(34, 40, 49));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setBackground(new java.awt.Color(83, 187, 180));
+        jLabel2.setBackground(new java.awt.Color(34, 40, 49));
         jLabel2.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("DiscosXD");
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Planificacion.png"))); // NOI18N
+        jLabel2.setText("Algoritmo planificación");
         jLabel2.setOpaque(true);
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 40));
-
-        btn_equipo.setBackground(new java.awt.Color(80, 109, 132));
-        btn_equipo.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
-        btn_equipo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/team-work_88989.png"))); // NOI18N
-        btn_equipo.setText("Equipo");
-        btn_equipo.setBorder(null);
-        btn_equipo.setBorderPainted(false);
-        btn_equipo.setOpaque(false);
-        btn_equipo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_equipoActionPerformed(evt);
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel2MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel2MouseExited(evt);
             }
         });
-        jPanel2.add(btn_equipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 200, -1));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 250, 50));
+        jLabel2.getAccessibleContext().setAccessibleName("Algoritmo planificación");
 
-        btn_busqueda.setBackground(new java.awt.Color(80, 109, 132));
-        btn_busqueda.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
-        btn_busqueda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Disco.png"))); // NOI18N
-        btn_busqueda.setText("Tiempo de busqueda");
-        btn_busqueda.setToolTipText("");
-        btn_busqueda.setBorder(null);
-        btn_busqueda.setBorderPainted(false);
-        btn_busqueda.setOpaque(false);
-        btn_busqueda.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_busquedaActionPerformed(evt);
+        jLabel10.setBackground(new java.awt.Color(83, 187, 180));
+        jLabel10.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setText("DiscosXD");
+        jLabel10.setOpaque(true);
+        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 40));
+
+        jLabel11.setBackground(new java.awt.Color(34, 40, 49));
+        jLabel11.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/team-work_88989.png"))); // NOI18N
+        jLabel11.setText("Equipo");
+        jLabel11.setOpaque(true);
+        jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel11MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel11MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel11MouseExited(evt);
             }
         });
-        jPanel2.add(btn_busqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 200, 50));
+        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 250, 50));
 
-        btn_planificacion.setBackground(new java.awt.Color(80, 109, 132));
-        btn_planificacion.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
-        btn_planificacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Planificacion.png"))); // NOI18N
-        btn_planificacion.setText("Algoritmo de planificacion");
-        btn_planificacion.setToolTipText("");
-        btn_planificacion.setBorder(null);
-        btn_planificacion.setBorderPainted(false);
-        btn_planificacion.setOpaque(false);
-        btn_planificacion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_planificacionActionPerformed(evt);
+        jLabel12.setBackground(new java.awt.Color(34, 40, 49));
+        jLabel12.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Disco.png"))); // NOI18N
+        jLabel12.setText("Tiempo de busqueda");
+        jLabel12.setOpaque(true);
+        jLabel12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel12MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel12MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel12MouseExited(evt);
             }
         });
-        jPanel2.add(btn_planificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 220, 50));
+        jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 250, 50));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 510));
 
         jPanel3.setBackground(new java.awt.Color(83, 184, 187));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 730, 40));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 660, 40));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/UES.jpg"))); // NOI18N
 
@@ -200,23 +217,45 @@ public class formPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_equipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_equipoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_equipoActionPerformed
+    private void jLabel2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseExited
+        jLabel2.setBackground(new Color (34,40,49));
+    }//GEN-LAST:event_jLabel2MouseExited
 
-    private void btn_busquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_busquedaActionPerformed
+    private void jLabel2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseEntered
+        jLabel2.setBackground(new Color (83,187,180));
+    }//GEN-LAST:event_jLabel2MouseEntered
+
+    private void jLabel11MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseEntered
+        jLabel11.setBackground(new Color (83,187,180));
+    }//GEN-LAST:event_jLabel11MouseEntered
+
+    private void jLabel11MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseExited
+       jLabel11.setBackground(new Color (34,40,49));
+    }//GEN-LAST:event_jLabel11MouseExited
+
+    private void jLabel12MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseEntered
+      jLabel12.setBackground(new Color (83,187,180));
+    }//GEN-LAST:event_jLabel12MouseEntered
+
+    private void jLabel12MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseExited
+        jLabel12.setBackground(new Color (34,40,49));
+    }//GEN-LAST:event_jLabel12MouseExited
+
+    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
+      //Vacio. 
+    }//GEN-LAST:event_jLabel11MouseClicked
+
+    private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
         form_tiempo_busqueda form= new form_tiempo_busqueda();
         form.setVisible(true);
         dispose();
-        
-        
-    }//GEN-LAST:event_btn_busquedaActionPerformed
+    }//GEN-LAST:event_jLabel12MouseClicked
 
-    private void btn_planificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_planificacionActionPerformed
-        form_algoritmo_planificacion form= new form_algoritmo_planificacion();
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+         form_algoritmo_planificacion form= new form_algoritmo_planificacion();
         form.setVisible(true);
         dispose();
-    }//GEN-LAST:event_btn_planificacionActionPerformed
+    }//GEN-LAST:event_jLabel2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -254,10 +293,10 @@ public class formPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_busqueda;
-    private javax.swing.JButton btn_equipo;
-    private javax.swing.JButton btn_planificacion;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
