@@ -10,9 +10,12 @@ import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Point;
 import static java.lang.System.out;
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;;
@@ -51,6 +54,11 @@ public class form_algoritmo_planificacion extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -136,10 +144,28 @@ public class form_algoritmo_planificacion extends javax.swing.JFrame {
 
         jLabel1.setText("ALGORITMO DE PLANIFICACION");
 
-        jButton1.setText("jButton1");
+        jButton1.setText("Ejecutar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Cola de direcciones: ");
+
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("* La cola de direcciones debe de ingresarse con numeros separados por comas (150,350,745,985)");
+
+        jLabel5.setText("Cantidad de sectores:");
+
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
             }
         });
 
@@ -148,22 +174,43 @@ public class form_algoritmo_planificacion extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(255, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(247, 247, 247))
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(74, 74, 74)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(jButton1)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jPanel4Layout.createSequentialGroup()
+                            .addComponent(jLabel5)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jTextField2))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(0, 114, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                .addGap(7, 7, 7)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
-                .addGap(349, 349, 349))
+                .addContainerGap(328, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 40, 660, 470));
@@ -185,9 +232,12 @@ public class form_algoritmo_planificacion extends javax.swing.JFrame {
     //Inicio de cuadricula
     public static class Grid extends JPanel {
 
+        //creando una lista de cordenadas llamada fillCells
         private List<Point> fillCells;
-
+        
+        //Constructor de Grid
         public Grid() {
+            //
             fillCells = new ArrayList<>(25);
         }
 
@@ -199,7 +249,8 @@ public class form_algoritmo_planificacion extends javax.swing.JFrame {
                 int cellY = 10 + (fillCell.y * 10);
                 g.setColor(Color.BLACK);
                 g.fillRect(cellX, cellY, 10, 10);
-            }
+                }
+            
             g.setColor(Color.BLUE);
             g.drawRect(10, 10, 800, 500);
 
@@ -212,7 +263,7 @@ public class form_algoritmo_planificacion extends javax.swing.JFrame {
             }
         }
 
-        public void fillCell(int x, int y) {
+        public void fillCell(int x, int y) {            
             fillCells.add(new Point(x, y));
             repaint();
         }
@@ -264,22 +315,84 @@ public class form_algoritmo_planificacion extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
       
-       Grid grid = new Grid();
+                /*Grid grid = new Grid();
+       
                 JFrame window = new JFrame();
                 window.setSize(840, 560);
                 window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                window.add(grid);
-                window.setVisible(true);     
+                window.add(grid);      */              
+                 
+                //retomamos los datos de los testfield
+                String cola =jTextField1.getText();  
+                String cadena2=jTextField2.getText();
+                //dividimos en un arreglo de cadenas la cola de direcciones
+                String[] numArray = cola.split(","); 
+                //sacaos el tamaño del arreglo
+                int tamaño=numArray.length;
+                for (int i=0;i<tamaño;i++) {
+                 int x = Integer.parseInt(numArray[i]);
+                 int datos[]=new int [2];
+                 //separamos cada datos para identificar columna y fila, lo retoma el arreglo de neteros.
+                 datos=separar(x);
+                 JOptionPane.showMessageDialog(null,"Entero"+datos[0]+"Decimal "+datos[1]);
+                 }
                 
-                grid.fillCell(0,3);
-                grid.fillCell(0, 0);
-                grid.fillCell(79, 0);
-                grid.fillCell(0, 49);
-                grid.fillCell(79, 49);
-                grid.fillCell(39, 24);
+                int filas=0;
+                 if(validar(cola,cadena2)){
+                filas= Integer.parseInt(cadena2)/100;
+                              
+                TestGrid02 prueba = new TestGrid02(filas);                
+                }
+                  else {
+                    JOptionPane.showMessageDialog(null,"Datos erroneos, volver a introducir");
+                    jTextField1.setText(null);
+                    jTextField2.setText(null);
+                } 
+                 
+                 
+                 /*
+                if (validar(cola,cadena2)){
+                window.setVisible(true); 
+                for (int i=0;i<=x;i++){
+                int num =Integer.parseInt(numArray[i]);  
+                
+                grid.fillCell(0,i);            
+                }
+                }
+                 */           
+                                        
+        
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
+
+    public static boolean validar(String cadena,String cadena2 ){       
+        return cadena.matches("[0-9,]*")& cadena2.matches("[0-9]*")&!cadena.equals("")&!cadena2.equals("");
+    }
+    
+    public static int[] separar(int x){
+        double decimal= x* 1.0;
+        decimal=decimal/100;
+        double parteDecimal = decimal % 1;
+        double parteEntera = decimal - parteDecimal;
+        parteDecimal=parteDecimal*100;
+        
+        int entero= (int) parteEntera; 
+        int deci= (int) parteDecimal;
+        
+        int[] datos=new int[2];
+        datos [0]=entero;
+        datos[1]=deci;        
+        return datos;
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -322,10 +435,15 @@ public class form_algoritmo_planificacion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }
