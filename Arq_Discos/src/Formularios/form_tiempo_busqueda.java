@@ -6,6 +6,8 @@
 package Formularios;
 
 import java.awt.Color;
+import java.text.DecimalFormat;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -52,6 +54,11 @@ public class form_tiempo_busqueda extends javax.swing.JFrame {
         txtVelR = new javax.swing.JTextField();
         txtDirF = new javax.swing.JTextField();
         btnTB = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        txtcantS = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        txtTB = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -141,7 +148,7 @@ public class form_tiempo_busqueda extends javax.swing.JFrame {
 
         jLabel6.setText("Cantidad de cilindros que contiene*:");
 
-        jLabel7.setText("Velocidad de revoluciones*:");
+        jLabel7.setText("Velocidad de giro*:");
 
         bGVelR.add(rBRPM);
         rBRPM.setText("RPM");
@@ -182,78 +189,109 @@ public class form_tiempo_busqueda extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Cantidad de sectores por pista*:");
+
+        txtcantS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtcantSActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setText("Tiempo de búsqueda*:");
+
+        jLabel13.setText("ms");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(132, 132, 132)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel4)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(66, 66, 66)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(44, 44, 44))
+                            .addComponent(jLabel4)
                             .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addGap(14, 14, 14)))
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCantC, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCantD, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addComponent(jLabel6)
+                                        .addGap(18, 18, 18))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addGap(48, 48, 48)))
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtCantD, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtCantC, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(35, 35, 35)
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtTB, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel13))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel1))
+                                .addGap(35, 35, 35)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtDirF, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtDirI, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(txtcantS, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtVelR, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(rBRPM)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(rBRPS))))))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel9))
-                        .addGap(109, 109, 109)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtDirF, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDirI, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtVelR, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(rBRPM)
-                        .addGap(18, 18, 18)
-                        .addComponent(rBRPS)
-                        .addGap(48, 48, 48)))
-                .addContainerGap(106, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnTB)
-                .addGap(235, 235, 235))
+                        .addGap(194, 194, 194)
+                        .addComponent(btnTB)))
+                .addContainerGap(128, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(40, 40, 40)
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(txtCantD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCantD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10)
+                    .addComponent(txtTB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txtCantC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(rBRPM)
-                    .addComponent(rBRPS)
-                    .addComponent(txtVelR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(txtDirI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(txtDirF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel7)
+                        .addGap(8, 8, 8)
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel9))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtcantS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(rBRPM)
+                            .addComponent(rBRPS)
+                            .addComponent(txtVelR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtDirI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtDirF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(btnTB)
-                .addContainerGap(239, Short.MAX_VALUE))
+                .addContainerGap(202, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 40, 660, 470));
@@ -322,15 +360,229 @@ public class form_tiempo_busqueda extends javax.swing.JFrame {
 
     private void btnTBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTBActionPerformed
         // TODO add your handling code here:
+        //captura valores de los textbox
         String cantPD=txtCantD.getText();
         String cantC=txtCantC.getText();
-        String velocidadR=txtVelR.getText();
+        String velR=txtVelR.getText();
         String dirI=txtDirI.getText();
         String dirF=txtDirF.getText();
+        String cantSD=txtcantS.getText();
+        String tbD=txtTB.getText();
+                //Variables para uso de calculos de resultado
+        int secC,cantHeads,cantP,cantS,dirD1,dirD2,headD1,headD2,secD1,secD2,d1,d2;
+        int cD1,cD2,resD1,resD2,tBP,tB,cantSR,secD1Mov,secXR,totSecR;
+        //variable si el recorrdio es mayor a los sectores de un cilindro
+        int secCIfM=0;
+        double x,tR,tTotRS,tTotD1D2;
+        boolean rpsT=false;
+        // asignar un decimalFormat para el tiempo de rotación
+        DecimalFormat df=new DecimalFormat("#.00");
+        //valida si RPS checkbox fue marcado
+        if(rBRPS.isSelected()){
+            rpsT=true;
+        }
+        //valida si los datos fueron ingresados correctamente
+        if(validarTB(cantPD, cantC, velR,dirI,dirF,cantSD,tbD)){
+            //proceso si fue marcado rpm
+            if(rpsT==false){
+                 //captura cantidad de sectores
+               cantS=Integer.parseInt(cantSD);
+                //capturar tiempo de busqueda 
+                tB=Integer.parseInt(tbD);
+                //captura la velocidad ingresada en rpm
+                int rpm=Integer.parseInt(velR);
+                //calcula el tiempo rotacional en ms
+                x=((60*1.0)/rpm)*100;
+                tR=x/cantS;
+                //calcula la cantidad de cabezas por la cantidad de platos que se ingresaron
+                cantP=Integer.parseInt(cantPD);
+                cantHeads=cantP*2;
+                
+               //Calcular sectores del cilindro
+                secC=cantHeads*cantS;
+                //capturar direcciones
+                d1=Integer.parseInt(dirI);
+                d2=Integer.parseInt(dirF);
+                //calcular cilindro donde se ubica direccion inicial y guardamos su residuo
+                cD1=d1/secC;
+                resD1=d1%secC;
+                //calcular cabeza y sector direccion inicial
+                headD1=resD1/cantS;
+                secD1=resD1%cantS;
+                //calcular cilindro donde se ubica direccion Final y guardamos su residuo
+                cD2=d2/secC;
+                resD2=d2%secC;
+                //calcular cabeza y sector direccion FINAL
+                headD2=resD2/cantS;
+                secD2=resD2%cantS;
+                JOptionPane.showMessageDialog(null,"D1: "+d1+" cilindo D1: "+cD1+" Head D1: "+headD1+" Sec D1: "+secD1+"D2: "+d2+" cilindo D2: "+cD2+" Head D1: "+headD2+" Sec D1: "+secD2+" Tiempo de rotacion:"+df.format(tR));
+            //Calcular tiempo de busqueda de petición
+            tBP=Math.abs((cD1-cD2))*tB;
+            JOptionPane.showMessageDialog(null,"Tiempo de busqueda: "+tBP);
+            //Calcular cantidad de sectores recorridos
+            cantSR=(int) (tBP/tR);
+            JOptionPane.showMessageDialog(null,"sectores recorridos"+cantSR);
+            //Calcular el sector al que se recorrio la Direccion inicial
+            secD1Mov=secD1+cantSR;
+            //Comparar si los sectores recorridos no sobrepasan los sectores maximos de un cilindro
+            if(secD1Mov>cantS){
+                for(int i=secD1Mov;i>cantS;i-=cantS){
+                   secCIfM=i; 
+                   
+                }
+                //realiza ultima resta que no hizo el ciclo for al ser ya menor
+               secD1Mov=secCIfM-cantS; 
+               JOptionPane.showMessageDialog(null,"ubicacion sector actual"+secD1Mov);
+               //Verificar si quedo arriba o abajo del sector de destino
+            if(secD1Mov>secD2){
+                //calcular sectores que faltan por recorrer para volver a la posicion 1
+                secXR=cantS-secD1Mov;
+                //calcular total de sectores recorridos
+                totSecR=secXR+secD2;
+                //Calcular tiempo total por recorrer estos sectores
+                tTotRS=totSecR*tR;
+                tTotD1D2=tBP+tTotRS;
+                JOptionPane.showMessageDialog(null,"tiempo total de busqueda fue mayor: "+tTotD1D2);
+            }
+            if(secD1Mov<secD2){
+                totSecR=secD2-secD1Mov;
+                 tTotRS=totSecR*tR;
+                tTotD1D2=tBP+tTotRS;
+                JOptionPane.showMessageDialog(null,"tiempo total de busqueda fue menor: "+tTotD1D2);
+            }
+            if(secD1Mov==secD2){
+                JOptionPane.showMessageDialog(null,"tiempo total de busqueda: "+tR);
+            }
+                }//Sino era mayor el recorrido al maximo de cilindros
+            else{
+            //Verificar si quedo arriba o abajo del sector de destino
+            if(secD1Mov>secD2){
+                //calcular sectores que faltan por recorrer para volver a la posicion 1
+                secXR=cantS-secD1Mov;
+                //calcular total de sectores recorridos
+                totSecR=secXR+secD2;
+                //Calcular tiempo total por recorrer estos sectores
+                tTotRS=totSecR*tR;
+                tTotD1D2=tBP+tTotRS;
+                JOptionPane.showMessageDialog(null,"tiempo total de busqueda: "+tTotD1D2);
+            }
+            if(secD1Mov<secD2){
+                totSecR=secD2-secD1Mov;
+                 tTotRS=totSecR*tR;
+                tTotD1D2=tBP+tTotRS;
+                JOptionPane.showMessageDialog(null,"tiempo total de busqueda: "+tTotD1D2);
+            }
+            if(secD1Mov==secD2){
+                JOptionPane.showMessageDialog(null,"tiempo total de busqueda: "+tR);
+            }
+            }
+                
+            }//proceso si fue marcado rps
+            else{
+                //captura cantidad de sectores
+               cantS=Integer.parseInt(cantSD);
+                //capturar tiempo de busqueda 
+                tB=Integer.parseInt(tbD);
+                //captura la velocidad ingresada en rps
+                int rps=Integer.parseInt(velR);
+                //calcula el tiempo rotacional en ms
+                x=((1*1.0)/rps)*1000;
+                tR=x/cantS;
+                //calcula la cantidad de cabezas por la cantidad de platos que se ingresaron
+                cantP=Integer.parseInt(cantPD);
+                cantHeads=cantP*2;
+                
+               //Calcular sectores del cilindro
+                secC=cantHeads*cantS;
+                //capturar direcciones
+                d1=Integer.parseInt(dirI);
+                d2=Integer.parseInt(dirF);
+                //calcular cilindro donde se ubica direccion inicial y guardamos su residuo
+                cD1=d1/secC;
+                resD1=d1%secC;
+                //calcular cabeza y sector direccion inicial
+                headD1=resD1/cantS;
+                secD1=resD1%cantS;
+                //calcular cilindro donde se ubica direccion Final y guardamos su residuo
+                cD2=d2/secC;
+                resD2=d2%secC;
+                //calcular cabeza y sector direccion FINAL
+                headD2=resD2/cantS;
+                secD2=resD2%cantS;
+                JOptionPane.showMessageDialog(null,"D1: "+d1+" cilindo D1: "+cD1+" Head D1: "+headD1+" Sec D1: "+secD1+"D2: "+d2+" cilindo D2: "+cD2+" Head D1: "+headD2+" Sec D1: "+secD2+" Tiempo de rotacion:"+df.format(tR));
+            //Calcular tiempo de busqueda de petición
+            tBP=Math.abs((cD1-cD2))*tB;
+            JOptionPane.showMessageDialog(null,"Tiempo de busqueda: "+tBP);
+            //Calcular cantidad de sectores recorridos
+            cantSR=(int) (tBP/tR);
+            JOptionPane.showMessageDialog(null,"sectores recorridos"+cantSR);
+            //Calcular el sector al que se recorrio la Direccion inicial
+            secD1Mov=secD1+cantSR;
+            //Comparar si los sectores recorridos no sobrepasan los sectores maximos de un cilindro
+            if(secD1Mov>cantS){
+                for(int i=secD1Mov;i>cantS;i-=cantS){
+                   secCIfM=i; 
+                   
+                }
+                //realiza ultima resta que no hizo el ciclo for al ser ya menor
+               secD1Mov=secCIfM-cantS; 
+               JOptionPane.showMessageDialog(null,"ubicacion sector actual"+secD1Mov);
+               //Verificar si quedo arriba o abajo del sector de destino
+            if(secD1Mov>secD2){
+                //calcular sectores que faltan por recorrer para volver a la posicion 1
+                secXR=cantS-secD1Mov;
+                //calcular total de sectores recorridos
+                totSecR=secXR+secD2;
+                //Calcular tiempo total por recorrer estos sectores
+                tTotRS=totSecR*tR;
+                tTotD1D2=tBP+tTotRS;
+                JOptionPane.showMessageDialog(null,"tiempo total de busqueda fue mayor: "+tTotD1D2);
+            }
+            if(secD1Mov<secD2){
+                totSecR=secD2-secD1Mov;
+                 tTotRS=totSecR*tR;
+                tTotD1D2=tBP+tTotRS;
+                JOptionPane.showMessageDialog(null,"tiempo total de busqueda fue menor: "+tTotD1D2);
+            }
+            if(secD1Mov==secD2){
+                JOptionPane.showMessageDialog(null,"tiempo total de busqueda: "+tR);
+            }
+                }//Sino era mayor el recorrido al maximo de cilindros
+            else{
+            //Verificar si quedo arriba o abajo del sector de destino
+            if(secD1Mov>secD2){
+                //calcular sectores que faltan por recorrer para volver a la posicion 1
+                secXR=cantS-secD1Mov;
+                //calcular total de sectores recorridos
+                totSecR=secXR+secD2;
+                //Calcular tiempo total por recorrer estos sectores
+                tTotRS=totSecR*tR;
+                tTotD1D2=tBP+tTotRS;
+                JOptionPane.showMessageDialog(null,"tiempo total de busqueda: "+tTotD1D2);
+            }
+            if(secD1Mov<secD2){
+                totSecR=secD2-secD1Mov;
+                 tTotRS=totSecR*tR;
+                tTotD1D2=tBP+tTotRS;
+                JOptionPane.showMessageDialog(null,"tiempo total de busqueda: "+tTotD1D2);
+            }
+            if(secD1Mov==secD2){
+                JOptionPane.showMessageDialog(null,"tiempo total de busqueda: "+tR);
+            }
+            }
+           }
+        }else{
+            JOptionPane.showMessageDialog(null,"Asegurese de ingresar y marcar todos los datos correctamente, deben ser enteros POSITIVOS");
+        }
     }//GEN-LAST:event_btnTBActionPerformed
 
-    public static boolean validarTB(String cadena,String cadena2 ){       
-        return cadena.matches("[0-9,]*")& cadena2.matches("[0-9]*")&!cadena.equals("")&!cadena2.equals("");
+    
+    private void txtcantSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcantSActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtcantSActionPerformed
+
+    public static boolean validarTB(String cadena,String cadena2, String cadena3, String cadena4, String cadena5, String cadena6, String cadena7 ){       
+        return cadena.matches("[0-9,]*")& cadena2.matches("[0-9]*")& cadena3.matches("[0-9]*")& cadena4.matches("[0-9]*")& cadena5.matches("[0-9]*")& cadena6.matches("[0-9]*")& cadena7.matches("[0-9]*")&!cadena.equals("")&!cadena2.equals("")&!cadena3.equals("")&!cadena4.equals("")&!cadena5.equals("")&!cadena6.equals("")&!cadena7.equals("");
     }
     /**
      * @param args the command line arguments
@@ -358,7 +610,7 @@ public class form_tiempo_busqueda extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(form_tiempo_busqueda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
+        //</editor-fold>    
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -371,8 +623,11 @@ public class form_tiempo_busqueda extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bGVelR;
     private javax.swing.JButton btnTB;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -391,6 +646,8 @@ public class form_tiempo_busqueda extends javax.swing.JFrame {
     private javax.swing.JTextField txtCantD;
     private javax.swing.JTextField txtDirF;
     private javax.swing.JTextField txtDirI;
+    private javax.swing.JTextField txtTB;
     private javax.swing.JTextField txtVelR;
+    private javax.swing.JTextField txtcantS;
     // End of variables declaration//GEN-END:variables
 }
