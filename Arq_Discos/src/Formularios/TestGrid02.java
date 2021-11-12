@@ -21,7 +21,7 @@ import javax.swing.border.MatteBorder;
  * @author Usuario
  */
 public class TestGrid02 {
-    public TestGrid02(int filas) {
+    public TestGrid02(int filas, int[] fil, int []colum) {
         EventQueue.invokeLater(new Runnable() {
             @Override
             
@@ -35,20 +35,23 @@ public class TestGrid02 {
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setSize(840,560);
                 frame.setLayout(new BorderLayout());
-                frame.add(new TestPane(filas));
+                frame.add(new TestPane(filas,fil,colum));
                 frame.pack();
                 frame.setLocationRelativeTo(null);
                 frame.setVisible(true);
             }
         });
     }
+    
+   
 
     public class TestPane extends JPanel {
 
-        public TestPane(int filas) {
+        public TestPane(int filas,int[] fil,int[]colu) {
             setLayout(new GridBagLayout());
             //CellPane cellPane[]=new CellPane[filas];
-            
+            int x=fil.length;
+            int y=colu.length;
             GridBagConstraints gbc = new GridBagConstraints();
             for (int row = 0; row < filas; row++) {
                 for (int col = 0; col < 100; col++) {
@@ -59,8 +62,11 @@ public class TestGrid02 {
                     Border border = null;
                     border = new MatteBorder(1, 1, 1, 1, Color.GRAY);
                      
-                    if (row==3&col==2){
+                    for (int p=0;p<x;p++){                        
+                    if (row==fil[p]&col==colu[p]){                        
                         cellPane.setBackground(Color.BLUE);
+                    }
+                  
                     }
                     cellPane.setBorder(border);
                     add(cellPane, gbc);
@@ -68,8 +74,12 @@ public class TestGrid02 {
             }
             
         }
+        
+        
     }
 
+    
+    
     public class CellPane extends JPanel {
 
         private Color defaultBackground;
