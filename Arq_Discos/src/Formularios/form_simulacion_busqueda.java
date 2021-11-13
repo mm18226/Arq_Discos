@@ -5,11 +5,23 @@
  */
 package Formularios;
 
+import java.awt.BasicStroke;
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import static java.lang.Thread.sleep;
+import javax.swing.JPanel;
+import javax.swing.border.Border;
+import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -30,7 +42,13 @@ public class form_simulacion_busqueda extends javax.swing.JFrame {
         form_tiempo_busqueda datosFB=new form_tiempo_busqueda();
         //llamado a funcion para mostrar proceso al usuario
         mostrarSimulacion(datosFB);
+        
+        
+                        
+        // pack();
     }
+    
+    
 //mensaje a ir mostrando durante la carga
         String mensaje="";
 
@@ -62,7 +80,7 @@ public class form_simulacion_busqueda extends javax.swing.JFrame {
             public void run(){
                 for(int i=1;i<=100;i++){
                     try{
-                        Thread.sleep(100);
+                        Thread.sleep(10);
                         progressB.setValue(i);
                         
                     }catch (InterruptedException ex){
@@ -76,7 +94,7 @@ public class form_simulacion_busqueda extends javax.swing.JFrame {
                     if(progressB.getValue()>10&progressB.getValue()<=20){
                       
                     //sectores por cilindro
-                    mensaje="El cálculo de sectores por cilindro= "+datosFB.secC+"sectores/cilindro";
+                    mensaje="El cálculo de sectores por cilindro= "+datosFB.secC+" Sectores/cilindro";
                     mostrarMensaje(mensaje);
                     }
                     if(progressB.getValue()>20&progressB.getValue()<=25){
@@ -108,19 +126,34 @@ public class form_simulacion_busqueda extends javax.swing.JFrame {
                     }
                     if(progressB.getValue()>40&progressB.getValue()<=45){
                         //La cabeza donde se encuentra la direccioón2
-                    mensaje="La cabeza donde se encuentra la dirección inicial "+datosFB.dirF+" es: "+datosFB.headD2;
+                    mensaje="La cabeza donde se encuentra la dirección destino "+datosFB.dirF+" es: "+datosFB.headD2;
                     mostrarMensaje(mensaje);
                     }
                     if(progressB.getValue()>45&progressB.getValue()<=50){
                         //El sector donde se encuentra la direccioón2
-                    mensaje="El sector donde se encuentra la dirección inicial "+datosFB.dirF+" es: "+datosFB.secD2;
+                    mensaje="El sector donde se encuentra la dirección destino "+datosFB.dirF+" es: "+datosFB.secD2;
                     mostrarMensaje(mensaje);
                     }
                     
-                    //Colocar datos direccion inicial en la tabla
+                    //Colocar datos direccion destino en la tabla
                     if(progressB.getValue()==51){
                        //Colocar datos en tabla
                     insertarDatosTableD2(datosFB);
+                   
+                    
+                    }
+                    //dibujar cabeza inicial
+                    if(progressB.getValue()==55){
+                        dibujarCabezaInicial(datosFB);
+                    }
+                    //Dibujar cilindro inicial
+                    if(progressB.getValue()==60){
+                        dibujarCilindroInicial(datosFB);
+                                          
+                    }
+                    //Mostrar Pista 1
+                    if(progressB.getValue()==62){
+                        mostrarPistaI();                                       
                     }
                 }
             }
@@ -139,6 +172,9 @@ public class form_simulacion_busqueda extends javax.swing.JFrame {
         fila1[3]=datosFB.secD1; 
         modelo.addRow(fila1); 
         this.tableDatosD.setModel(modelo); 
+        this.mostrarPista1.setLayout(new BorderLayout());
+            this.mostrarPista1.add(new TestPaneI(datosFB));  
+        
     }
     private void insertarDatosTableD2(form_tiempo_busqueda datosFB){
         DefaultTableModel modelo = (DefaultTableModel) tableDatosD.getModel();  
@@ -150,7 +186,85 @@ public class form_simulacion_busqueda extends javax.swing.JFrame {
         modelo.addRow(fila2); 
         this.tableDatosD.setModel(modelo); 
     }
+    //dibujar representacion de cabeza
+    private void dibujarCabezaInicial( form_tiempo_busqueda datosFB){
+        Graphics2D cabeza=(Graphics2D)this.mostrarCabeza.getGraphics();
+        cabeza.setStroke(new BasicStroke(10.f));
+        cabeza.setPaint(Color.green);
+        cabeza.fillOval(10, 2, 60, 60);//orden xpanel,ypanel,grande segun radio,igual al anterior
+        lblUH.setText("Al iniciar la dirección "+datosFB.dirI+" se encuentra en la cabeza "+datosFB.headD1);
+    }
+        private void dibujarCilindroInicial(form_tiempo_busqueda datosFB ){
+        Graphics2D cabeza=(Graphics2D)this.cilindroP.getGraphics();
+        cabeza.setStroke(new BasicStroke(10.f));
+        cabeza.setPaint(Color.blue);
+        cabeza.drawOval(10, 5, 50, 50);//orden xpanel,ypanel,grande segun radio,igual al anterior
+        lblUC.setText("En la cabeza "+datosFB.headD1+" la direccion se encuentra en su cilindro "+datosFB.cD1);
+        }
+        
+        //Dibujar pista con sectores
+ 
 
+        public class TestPaneI extends JPanel {
+
+        public TestPaneI(form_tiempo_busqueda datosFB) {
+            setLayout(new GridBagLayout());
+
+            GridBagConstraints gbc = new GridBagConstraints();
+            for (int row = 0; row < 1; row++) {
+                for (int col = 0; col < datosFB.cantS; col++) {
+                    gbc.gridx = col;
+                    gbc.gridy = row;
+
+                    CellPane cellPane = new CellPane(datosFB);
+                    Border border = null;
+                    if (row < 0) {
+                        if (col < datosFB.cantS-1) {
+                            border = new MatteBorder(1, 1, 0, 0, Color.GRAY);
+                        } else {
+                            border = new MatteBorder(1, 1, 0, 1, Color.GRAY);
+                        }
+                    } else {
+                        if (col < datosFB.cantS-1) {
+                            border = new MatteBorder(1, 1, 1, 0, Color.GRAY);
+                        } else {
+                            border = new MatteBorder(1, 1, 1, 1, Color.GRAY);
+                        }
+                    }
+                    if (col==datosFB.secD1){                        
+                        cellPane.setBackground(Color.BLUE);
+                    }
+                    cellPane.setBorder(border);
+                    add(cellPane, gbc);
+                }
+            }
+        }
+    } 
+    
+         
+         public class CellPane extends JPanel {
+
+        private Color defaultBackground;
+
+        public CellPane(form_tiempo_busqueda datosFB) {
+                    /*defaultBackground = getBackground();
+                    setBackground(Color.BLUE);
+                    setBackground(defaultBackground);*/
+      
+        }
+        
+        @Override
+        public Dimension getPreferredSize() {
+            return new Dimension(30, 30);
+        }
+    
+         }
+         
+         //mostrar Pista direccion inicial
+        private void mostrarPistaI( ){
+            
+        }
+         
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -174,6 +288,11 @@ public class form_simulacion_busqueda extends javax.swing.JFrame {
         lblProcesoAct = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tableDatosD = new javax.swing.JTable();
+        cilindroP = new javax.swing.JPanel();
+        mostrarCabeza = new javax.swing.JPanel();
+        lblUH = new javax.swing.JLabel();
+        lblUC = new javax.swing.JLabel();
+        mostrarPista1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -255,7 +374,7 @@ public class form_simulacion_busqueda extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(83, 184, 187));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 660, 40));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 760, 40));
 
         progressB.setStringPainted(true);
 
@@ -284,14 +403,43 @@ public class form_simulacion_busqueda extends javax.swing.JFrame {
             tableDatosD.getColumnModel().getColumn(3).setResizable(false);
         }
 
+        javax.swing.GroupLayout cilindroPLayout = new javax.swing.GroupLayout(cilindroP);
+        cilindroP.setLayout(cilindroPLayout);
+        cilindroPLayout.setHorizontalGroup(
+            cilindroPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 120, Short.MAX_VALUE)
+        );
+        cilindroPLayout.setVerticalGroup(
+            cilindroPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 89, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout mostrarCabezaLayout = new javax.swing.GroupLayout(mostrarCabeza);
+        mostrarCabeza.setLayout(mostrarCabezaLayout);
+        mostrarCabezaLayout.setHorizontalGroup(
+            mostrarCabezaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 120, Short.MAX_VALUE)
+        );
+        mostrarCabezaLayout.setVerticalGroup(
+            mostrarCabezaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 89, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout mostrarPista1Layout = new javax.swing.GroupLayout(mostrarPista1);
+        mostrarPista1.setLayout(mostrarPista1Layout);
+        mostrarPista1Layout.setHorizontalGroup(
+            mostrarPista1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        mostrarPista1Layout.setVerticalGroup(
+            mostrarPista1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 28, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblProcesoAct, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(121, 121, 121))
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
@@ -303,24 +451,54 @@ public class form_simulacion_busqueda extends javax.swing.JFrame {
                             .addComponent(progressB, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGap(30, 30, 30)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(18, Short.MAX_VALUE))
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblProcesoAct, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(34, 34, 34)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lblUH, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
+                                    .addComponent(lblUC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(118, 118, 118)
+                                .addComponent(mostrarCabeza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(118, 118, 118)
+                                .addComponent(cilindroP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(mostrarPista1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(progressB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblProcesoAct, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblProcesoAct, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(832, 832, 832)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblUH, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(mostrarCabeza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(mostrarPista1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(lblUC, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19)
+                .addComponent(cilindroP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(587, 587, 587)
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 40, 660, 470));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 40, 760, 470));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -413,6 +591,7 @@ public class form_simulacion_busqueda extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel cilindroP;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -424,6 +603,10 @@ public class form_simulacion_busqueda extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblProcesoAct;
+    private javax.swing.JLabel lblUC;
+    private javax.swing.JLabel lblUH;
+    private javax.swing.JPanel mostrarCabeza;
+    private javax.swing.JPanel mostrarPista1;
     private javax.swing.JProgressBar progressB;
     private javax.swing.JTable tableDatosD;
     // End of variables declaration//GEN-END:variables
