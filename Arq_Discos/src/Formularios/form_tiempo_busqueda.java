@@ -20,8 +20,25 @@ public class form_tiempo_busqueda extends javax.swing.JFrame {
      */
     public form_tiempo_busqueda() {
         initComponents();
-    }
 
+    }
+    
+    //Declaracion variables publicas para enviar al form simulacion busqueda
+    public static String cantPD="";
+    public static String cantC="";
+    public static String velR="";
+    public static String dirI="";
+    public static String dirF="";
+    public static String cantSD="";
+    public static String tbD="";
+    //Variables para uso de calculos de resultado
+    public static int secC,cantHeads,cantP,cantS,dirD1,dirD2,headD1,headD2,secD1,secD2,d1,d2;
+    public static int cD1,cD2,resD1,resD2,tBP,tB,cantSR,secD1Mov,secXR,totSecR;
+    public static double x,tR,tTotRS,tTotD1D2;
+    //conocer si es un dato RPM o RPS
+    public static boolean rpsT=false;
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -213,22 +230,19 @@ public class form_tiempo_busqueda extends javax.swing.JFrame {
                             .addComponent(jLabel4)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
                                     .addGroup(jPanel4Layout.createSequentialGroup()
-                                        .addComponent(jLabel6)
-                                        .addGap(18, 18, 18))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                                         .addComponent(jLabel5)
-                                        .addGap(48, 48, 48)))
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtCantD, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtCantC, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(35, 35, 35)
+                                        .addGap(72, 72, 72)
+                                        .addComponent(txtCantD, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel10)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtTB, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel13))
                             .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(24, 24, 24)
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel8)
                                     .addComponent(jLabel9)
@@ -239,15 +253,17 @@ public class form_tiempo_busqueda extends javax.swing.JFrame {
                                     .addComponent(txtDirF, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtDirI, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel4Layout.createSequentialGroup()
-                                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(txtcantS, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtVelR, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(txtCantC, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                .addComponent(txtcantS, javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(txtVelR, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(rBRPM)
                                         .addGap(18, 18, 18)
                                         .addComponent(rBRPS))))))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(194, 194, 194)
+                        .addGap(243, 243, 243)
                         .addComponent(btnTB)))
                 .addContainerGap(128, Short.MAX_VALUE))
         );
@@ -304,7 +320,9 @@ public class form_tiempo_busqueda extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 2, Short.MAX_VALUE))
         );
 
         pack();
@@ -361,20 +379,16 @@ public class form_tiempo_busqueda extends javax.swing.JFrame {
     private void btnTBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTBActionPerformed
         // TODO add your handling code here:
         //captura valores de los textbox
-        String cantPD=txtCantD.getText();
-        String cantC=txtCantC.getText();
-        String velR=txtVelR.getText();
-        String dirI=txtDirI.getText();
-        String dirF=txtDirF.getText();
-        String cantSD=txtcantS.getText();
-        String tbD=txtTB.getText();
-                //Variables para uso de calculos de resultado
-        int secC,cantHeads,cantP,cantS,dirD1,dirD2,headD1,headD2,secD1,secD2,d1,d2;
-        int cD1,cD2,resD1,resD2,tBP,tB,cantSR,secD1Mov,secXR,totSecR;
+        cantPD=txtCantD.getText();
+        cantC=txtCantC.getText();
+        velR=txtVelR.getText();
+        dirI=txtDirI.getText();
+        dirF=txtDirF.getText();
+        cantSD=txtcantS.getText();
+        tbD=txtTB.getText();
         //variable si el recorrdio es mayor a los sectores de un cilindro
         int secCIfM=0;
-        double x,tR,tTotRS,tTotD1D2;
-        boolean rpsT=false;
+
         // asignar un decimalFormat para el tiempo de rotación
         DecimalFormat df=new DecimalFormat("#.00");
         //valida si RPS checkbox fue marcado
@@ -383,23 +397,35 @@ public class form_tiempo_busqueda extends javax.swing.JFrame {
         }
         //valida si los datos fueron ingresados correctamente
         if(validarTB(cantPD, cantC, velR,dirI,dirF,cantSD,tbD)){
-            //proceso si fue marcado rpm
-            if(rpsT==false){
-                 //captura cantidad de sectores
+            //validar que la direccion final o inicial no sobrepasen las direcciones maximas que puede tener el disco duro
+               //calcula la cantidad de cabezas por la cantidad de platos que se ingresaron
+               //captura cantidad de sectores
                cantS=Integer.parseInt(cantSD);
-                //capturar tiempo de busqueda 
-                tB=Integer.parseInt(tbD);
-                //captura la velocidad ingresada en rpm
-                int rpm=Integer.parseInt(velR);
-                //calcula el tiempo rotacional en ms
-                x=((60*1.0)/rpm)*100;
-                tR=x/cantS;
-                //calcula la cantidad de cabezas por la cantidad de platos que se ingresaron
                 cantP=Integer.parseInt(cantPD);
                 cantHeads=cantP*2;
                 
                //Calcular sectores del cilindro
                 secC=cantHeads*cantS;
+               
+                int cantMax;
+                int cantCC=Integer.parseInt(cantC);
+                
+                cantMax=secC * cantCC;
+                
+             if(Integer.parseInt(dirI)>cantMax ||Integer.parseInt(dirF)>cantMax){
+                 JOptionPane.showMessageDialog(null,"La direccion inicial o final sobrepasa el maximo que puede tener el disco duro especificado");
+             }
+             else{
+            //proceso si fue marcado rpm
+            if(rpsT==false){
+                 
+                //capturar tiempo de busqueda 
+                tB=Integer.parseInt(tbD);
+                //captura la velocidad ingresada en rpm
+                int rpm=Integer.parseInt(velR);
+                //calcula el tiempo rotacional en ms
+                x=((60*1.0)/rpm)*1000;
+                tR=x/cantS;
                 //capturar direcciones
                 d1=Integer.parseInt(dirI);
                 d2=Integer.parseInt(dirF);
@@ -415,13 +441,13 @@ public class form_tiempo_busqueda extends javax.swing.JFrame {
                 //calcular cabeza y sector direccion FINAL
                 headD2=resD2/cantS;
                 secD2=resD2%cantS;
-                JOptionPane.showMessageDialog(null,"D1: "+d1+" cilindo D1: "+cD1+" Head D1: "+headD1+" Sec D1: "+secD1+"D2: "+d2+" cilindo D2: "+cD2+" Head D1: "+headD2+" Sec D1: "+secD2+" Tiempo de rotacion:"+df.format(tR));
+               // JOptionPane.showMessageDialog(null,"D1: "+d1+" cilindo D1: "+cD1+" Head D1: "+headD1+" Sec D1: "+secD1+"D2: "+d2+" cilindo D2: "+cD2+" Head D1: "+headD2+" Sec D1: "+secD2+" Tiempo de rotacion:"+df.format(tR));
             //Calcular tiempo de busqueda de petición
             tBP=Math.abs((cD1-cD2))*tB;
-            JOptionPane.showMessageDialog(null,"Tiempo de busqueda: "+tBP);
+           // JOptionPane.showMessageDialog(null,"Tiempo de busqueda: "+tBP);
             //Calcular cantidad de sectores recorridos
             cantSR=(int) (tBP/tR);
-            JOptionPane.showMessageDialog(null,"sectores recorridos"+cantSR);
+           // JOptionPane.showMessageDialog(null,"sectores recorridos"+cantSR);
             //Calcular el sector al que se recorrio la Direccion inicial
             secD1Mov=secD1+cantSR;
             //Comparar si los sectores recorridos no sobrepasan los sectores maximos de un cilindro
@@ -432,7 +458,7 @@ public class form_tiempo_busqueda extends javax.swing.JFrame {
                 }
                 //realiza ultima resta que no hizo el ciclo for al ser ya menor
                secD1Mov=secCIfM-cantS; 
-               JOptionPane.showMessageDialog(null,"ubicacion sector actual"+secD1Mov);
+              // JOptionPane.showMessageDialog(null,"ubicacion sector actual"+secD1Mov);
                //Verificar si quedo arriba o abajo del sector de destino
             if(secD1Mov>secD2){
                 //calcular sectores que faltan por recorrer para volver a la posicion 1
@@ -442,16 +468,16 @@ public class form_tiempo_busqueda extends javax.swing.JFrame {
                 //Calcular tiempo total por recorrer estos sectores
                 tTotRS=totSecR*tR;
                 tTotD1D2=tBP+tTotRS;
-                JOptionPane.showMessageDialog(null,"tiempo total de busqueda fue mayor: "+tTotD1D2);
+               // JOptionPane.showMessageDialog(null,"tiempo total de busqueda fue mayor: "+tTotD1D2);
             }
             if(secD1Mov<secD2){
                 totSecR=secD2-secD1Mov;
                  tTotRS=totSecR*tR;
                 tTotD1D2=tBP+tTotRS;
-                JOptionPane.showMessageDialog(null,"tiempo total de busqueda fue menor: "+tTotD1D2);
+               // JOptionPane.showMessageDialog(null,"tiempo total de busqueda fue menor: "+tTotD1D2);
             }
             if(secD1Mov==secD2){
-                JOptionPane.showMessageDialog(null,"tiempo total de busqueda: "+tR);
+               // JOptionPane.showMessageDialog(null,"tiempo total de busqueda: "+tR);
             }
                 }//Sino era mayor el recorrido al maximo de cilindros
             else{
@@ -464,23 +490,21 @@ public class form_tiempo_busqueda extends javax.swing.JFrame {
                 //Calcular tiempo total por recorrer estos sectores
                 tTotRS=totSecR*tR;
                 tTotD1D2=tBP+tTotRS;
-                JOptionPane.showMessageDialog(null,"tiempo total de busqueda: "+tTotD1D2);
+               // JOptionPane.showMessageDialog(null,"tiempo total de busqueda: "+tTotD1D2);
             }
             if(secD1Mov<secD2){
                 totSecR=secD2-secD1Mov;
                  tTotRS=totSecR*tR;
                 tTotD1D2=tBP+tTotRS;
-                JOptionPane.showMessageDialog(null,"tiempo total de busqueda: "+tTotD1D2);
+               // JOptionPane.showMessageDialog(null,"tiempo total de busqueda: "+tTotD1D2);
             }
             if(secD1Mov==secD2){
-                JOptionPane.showMessageDialog(null,"tiempo total de busqueda: "+tR);
+               // JOptionPane.showMessageDialog(null,"tiempo total de busqueda: "+tR);
             }
             }
                 
             }//proceso si fue marcado rps
             else{
-                //captura cantidad de sectores
-               cantS=Integer.parseInt(cantSD);
                 //capturar tiempo de busqueda 
                 tB=Integer.parseInt(tbD);
                 //captura la velocidad ingresada en rps
@@ -488,12 +512,6 @@ public class form_tiempo_busqueda extends javax.swing.JFrame {
                 //calcula el tiempo rotacional en ms
                 x=((1*1.0)/rps)*1000;
                 tR=x/cantS;
-                //calcula la cantidad de cabezas por la cantidad de platos que se ingresaron
-                cantP=Integer.parseInt(cantPD);
-                cantHeads=cantP*2;
-                
-               //Calcular sectores del cilindro
-                secC=cantHeads*cantS;
                 //capturar direcciones
                 d1=Integer.parseInt(dirI);
                 d2=Integer.parseInt(dirF);
@@ -509,13 +527,13 @@ public class form_tiempo_busqueda extends javax.swing.JFrame {
                 //calcular cabeza y sector direccion FINAL
                 headD2=resD2/cantS;
                 secD2=resD2%cantS;
-                JOptionPane.showMessageDialog(null,"D1: "+d1+" cilindo D1: "+cD1+" Head D1: "+headD1+" Sec D1: "+secD1+"D2: "+d2+" cilindo D2: "+cD2+" Head D1: "+headD2+" Sec D1: "+secD2+" Tiempo de rotacion:"+df.format(tR));
+                //JOptionPane.showMessageDialog(null,"D1: "+d1+" cilindo D1: "+cD1+" Head D1: "+headD1+" Sec D1: "+secD1+"D2: "+d2+" cilindo D2: "+cD2+" Head D1: "+headD2+" Sec D1: "+secD2+" Tiempo de rotacion:"+df.format(tR));
             //Calcular tiempo de busqueda de petición
             tBP=Math.abs((cD1-cD2))*tB;
-            JOptionPane.showMessageDialog(null,"Tiempo de busqueda: "+tBP);
+            //JOptionPane.showMessageDialog(null,"Tiempo de busqueda: "+tBP);
             //Calcular cantidad de sectores recorridos
             cantSR=(int) (tBP/tR);
-            JOptionPane.showMessageDialog(null,"sectores recorridos"+cantSR);
+            //JOptionPane.showMessageDialog(null,"sectores recorridos"+cantSR);
             //Calcular el sector al que se recorrio la Direccion inicial
             secD1Mov=secD1+cantSR;
             //Comparar si los sectores recorridos no sobrepasan los sectores maximos de un cilindro
@@ -526,7 +544,7 @@ public class form_tiempo_busqueda extends javax.swing.JFrame {
                 }
                 //realiza ultima resta que no hizo el ciclo for al ser ya menor
                secD1Mov=secCIfM-cantS; 
-               JOptionPane.showMessageDialog(null,"ubicacion sector actual"+secD1Mov);
+               //JOptionPane.showMessageDialog(null,"ubicacion sector actual"+secD1Mov);
                //Verificar si quedo arriba o abajo del sector de destino
             if(secD1Mov>secD2){
                 //calcular sectores que faltan por recorrer para volver a la posicion 1
@@ -536,16 +554,16 @@ public class form_tiempo_busqueda extends javax.swing.JFrame {
                 //Calcular tiempo total por recorrer estos sectores
                 tTotRS=totSecR*tR;
                 tTotD1D2=tBP+tTotRS;
-                JOptionPane.showMessageDialog(null,"tiempo total de busqueda fue mayor: "+tTotD1D2);
+                //JOptionPane.showMessageDialog(null,"tiempo total de busqueda fue mayor: "+tTotD1D2);
             }
             if(secD1Mov<secD2){
                 totSecR=secD2-secD1Mov;
                  tTotRS=totSecR*tR;
                 tTotD1D2=tBP+tTotRS;
-                JOptionPane.showMessageDialog(null,"tiempo total de busqueda fue menor: "+tTotD1D2);
+                //JOptionPane.showMessageDialog(null,"tiempo total de busqueda fue menor: "+tTotD1D2);
             }
             if(secD1Mov==secD2){
-                JOptionPane.showMessageDialog(null,"tiempo total de busqueda: "+tR);
+                //JOptionPane.showMessageDialog(null,"tiempo total de busqueda: "+tR);
             }
                 }//Sino era mayor el recorrido al maximo de cilindros
             else{
@@ -558,19 +576,24 @@ public class form_tiempo_busqueda extends javax.swing.JFrame {
                 //Calcular tiempo total por recorrer estos sectores
                 tTotRS=totSecR*tR;
                 tTotD1D2=tBP+tTotRS;
-                JOptionPane.showMessageDialog(null,"tiempo total de busqueda: "+tTotD1D2);
+               // JOptionPane.showMessageDialog(null,"tiempo total de busqueda: "+tTotD1D2);
             }
             if(secD1Mov<secD2){
                 totSecR=secD2-secD1Mov;
                  tTotRS=totSecR*tR;
                 tTotD1D2=tBP+tTotRS;
-                JOptionPane.showMessageDialog(null,"tiempo total de busqueda: "+tTotD1D2);
+               // JOptionPane.showMessageDialog(null,"tiempo total de busqueda: "+tTotD1D2);
             }
             if(secD1Mov==secD2){
-                JOptionPane.showMessageDialog(null,"tiempo total de busqueda: "+tR);
+                //JOptionPane.showMessageDialog(null,"tiempo total de busqueda: "+tR);
             }
             }
+            //mostrar simulacion del proceso
+            form_simulacion_busqueda form= new form_simulacion_busqueda();
+            form.setVisible(true);
+            dispose();
            }
+        }
         }else{
             JOptionPane.showMessageDialog(null,"Asegurese de ingresar y marcar todos los datos correctamente, deben ser enteros POSITIVOS");
         }
@@ -611,11 +634,13 @@ public class form_tiempo_busqueda extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>    
+        
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new form_tiempo_busqueda().setVisible(true);
+                
             }
         });
     }
