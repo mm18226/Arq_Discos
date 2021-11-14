@@ -263,7 +263,7 @@ public class form_simulacion_busqueda extends javax.swing.JFrame {
                     try{
                 for (int col = 0; col < datosFB.cantS; col++) {
                     
-                        Thread.sleep(200);
+                        Thread.sleep(150);
                         gbc.gridx = col;
                         gbc.gridy = row;
 
@@ -366,7 +366,7 @@ public class form_simulacion_busqueda extends javax.swing.JFrame {
                     try{
                 for (int col = 0; col < datosFB.cantS; col++) {
                     
-                        Thread.sleep(200);
+                        Thread.sleep(150);
                         gbc.gridx = col;
                         gbc.gridy = row;
 
