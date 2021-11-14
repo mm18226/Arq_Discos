@@ -8,6 +8,7 @@ import java.awt.GridBagLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -31,14 +32,17 @@ public class TestGrid02 {
                 } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
                 }
 
+                //TestPane testpane=new TestPane();
                 JFrame frame = new JFrame("Testing");
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setSize(840,560);
-                frame.setLayout(new BorderLayout());
+                frame.setLayout(new BorderLayout());                                
                 frame.add(new TestPane(filas,fil,colum));
+                frame.setVisible(true);
                 frame.pack();
                 frame.setLocationRelativeTo(null);
-                frame.setVisible(true);
+                
+                 
             }
         });
     }
@@ -47,6 +51,9 @@ public class TestGrid02 {
 
     public class TestPane extends JPanel {
 
+        //Constructor vacio
+       
+        
         public TestPane(int filas,int[] fil,int[]colu) {
             setLayout(new GridBagLayout());
             //CellPane cellPane[]=new CellPane[filas];
@@ -65,13 +72,22 @@ public class TestGrid02 {
                     for (int p=0;p<x;p++){                        
                     if (row==fil[p]&col==colu[p]){                        
                         cellPane.setBackground(Color.BLUE);
+                        //JOptionPane.showMessageDialog(null,"solo estamos configurando..");                        
                     }
-                  
+                    
                     }
                     cellPane.setBorder(border);
                     add(cellPane, gbc);
+                    
                 }
+                
             }
+            
+            
+        }
+        
+        public void pintar(){
+               
             
         }
         
