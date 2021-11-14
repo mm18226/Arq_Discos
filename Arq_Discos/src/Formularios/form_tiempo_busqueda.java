@@ -32,9 +32,9 @@ public class form_tiempo_busqueda extends javax.swing.JFrame {
     public static String cantSD="";
     public static String tbD="";
     //Variables para uso de calculos de resultado
-    public static int secC,cantHeads,cantP,cantS,dirD1,dirD2,headD1,headD2,secD1,secD2,d1,d2;
-    public static int cD1,cD2,resD1,resD2,tBP,tB,cantSR,secD1Mov,secXR,totSecR;
-    public static double x,tR,tTotRS,tTotD1D2;
+    public static int secC=0,cantHeads=0,cantP=0,cantS=0,dirD1=0,dirD2=0,headD1=0,headD2=0,secD1=0,secD2=0,d1=0,d2=0;
+    public static int cD1=0,cD2=0,resD1=0,resD2=0,tBP=0,tB=0,cantSR=0,secD1Mov=0,secXR=0,totSecR=0,secRest=0,cantVueltas=0;
+    public static double x=0,tR=0,tTotRS=0,tTotD1D2=0;
     //conocer si es un dato RPM o RPS
     public static boolean rpsT=false;
     
@@ -401,6 +401,7 @@ public class form_tiempo_busqueda extends javax.swing.JFrame {
                //calcula la cantidad de cabezas por la cantidad de platos que se ingresaron
                //captura cantidad de sectores
                cantS=Integer.parseInt(cantSD);
+               //cantidad de platos y calculo de cabezas
                 cantP=Integer.parseInt(cantPD);
                 cantHeads=cantP*2;
                 
@@ -454,15 +455,16 @@ public class form_tiempo_busqueda extends javax.swing.JFrame {
             if(secD1Mov>cantS){
                 for(int i=secD1Mov;i>cantS;i-=cantS){
                    secCIfM=i; 
-                   
+                   cantVueltas++;
                 }
                 //realiza ultima resta que no hizo el ciclo for al ser ya menor
-               secD1Mov=secCIfM-cantS; 
+               secRest=secCIfM-cantS; 
+               cantVueltas++;
               // JOptionPane.showMessageDialog(null,"ubicacion sector actual"+secD1Mov);
                //Verificar si quedo arriba o abajo del sector de destino
-            if(secD1Mov>secD2){
+            if(secRest>secD2){
                 //calcular sectores que faltan por recorrer para volver a la posicion 1
-                secXR=cantS-secD1Mov;
+                secXR=cantS-secRest;
                 //calcular total de sectores recorridos
                 totSecR=secXR+secD2;
                 //Calcular tiempo total por recorrer estos sectores
@@ -470,14 +472,15 @@ public class form_tiempo_busqueda extends javax.swing.JFrame {
                 tTotD1D2=tBP+tTotRS;
                // JOptionPane.showMessageDialog(null,"tiempo total de busqueda fue mayor: "+tTotD1D2);
             }
-            if(secD1Mov<secD2){
-                totSecR=secD2-secD1Mov;
+            if(secRest<secD2){
+                totSecR=secD2-secRest;
                  tTotRS=totSecR*tR;
                 tTotD1D2=tBP+tTotRS;
                // JOptionPane.showMessageDialog(null,"tiempo total de busqueda fue menor: "+tTotD1D2);
             }
-            if(secD1Mov==secD2){
+            if(secRest==secD2){
                // JOptionPane.showMessageDialog(null,"tiempo total de busqueda: "+tR);
+               tTotD1D2=tR;
             }
                 }//Sino era mayor el recorrido al maximo de cilindros
             else{
@@ -500,6 +503,7 @@ public class form_tiempo_busqueda extends javax.swing.JFrame {
             }
             if(secD1Mov==secD2){
                // JOptionPane.showMessageDialog(null,"tiempo total de busqueda: "+tR);
+               tTotD1D2=tR;
             }
             }
                 
@@ -540,15 +544,16 @@ public class form_tiempo_busqueda extends javax.swing.JFrame {
             if(secD1Mov>cantS){
                 for(int i=secD1Mov;i>cantS;i-=cantS){
                    secCIfM=i; 
-                   
+                   cantVueltas++;
                 }
                 //realiza ultima resta que no hizo el ciclo for al ser ya menor
-               secD1Mov=secCIfM-cantS; 
+               secRest=secCIfM-cantS; 
+               cantVueltas++;
                //JOptionPane.showMessageDialog(null,"ubicacion sector actual"+secD1Mov);
                //Verificar si quedo arriba o abajo del sector de destino
-            if(secD1Mov>secD2){
+            if(secRest>secD2){
                 //calcular sectores que faltan por recorrer para volver a la posicion 1
-                secXR=cantS-secD1Mov;
+                secXR=cantS-secRest;
                 //calcular total de sectores recorridos
                 totSecR=secXR+secD2;
                 //Calcular tiempo total por recorrer estos sectores
@@ -556,14 +561,16 @@ public class form_tiempo_busqueda extends javax.swing.JFrame {
                 tTotD1D2=tBP+tTotRS;
                 //JOptionPane.showMessageDialog(null,"tiempo total de busqueda fue mayor: "+tTotD1D2);
             }
-            if(secD1Mov<secD2){
-                totSecR=secD2-secD1Mov;
+            if(secRest<secD2){
+                totSecR=secD2-secRest;
                  tTotRS=totSecR*tR;
                 tTotD1D2=tBP+tTotRS;
                 //JOptionPane.showMessageDialog(null,"tiempo total de busqueda fue menor: "+tTotD1D2);
             }
             if(secD1Mov==secD2){
                 //JOptionPane.showMessageDialog(null,"tiempo total de busqueda: "+tR);
+                tTotD1D2=tR;
+                
             }
                 }//Sino era mayor el recorrido al maximo de cilindros
             else{
@@ -586,6 +593,7 @@ public class form_tiempo_busqueda extends javax.swing.JFrame {
             }
             if(secD1Mov==secD2){
                 //JOptionPane.showMessageDialog(null,"tiempo total de busqueda: "+tR);
+                tTotD1D2=tR;
             }
             }
             //mostrar simulacion del proceso
