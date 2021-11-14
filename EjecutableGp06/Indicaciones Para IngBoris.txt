@@ -1,0 +1,2 @@
+Para ejecutar el programa se debera ejecutar el archivo Arq_Discos.jar
+No se creo el .exe por el peso resultante muy alto.

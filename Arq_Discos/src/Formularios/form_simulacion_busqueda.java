@@ -294,7 +294,8 @@ public class form_simulacion_busqueda extends javax.swing.JFrame {
                          if (col==datosFB.secD1-1&cambio==false){                        
                             cellPane.setBackground(Color.BLUE);
                             lblDatosP1.setText("El sector actual donde se encuentra la direccion "+datosFB.dirI+" es: "+datosFB.secD1+"(AZUL)");
-                        }   
+                        lblPivote.setText(""+col);
+                         }   
                     
                         if(cambio==false){
                             if(col>datosFB.secD1-1){
@@ -303,6 +304,7 @@ public class form_simulacion_busqueda extends javax.swing.JFrame {
                                 
                                 col=-1;
                                 cambio=true;
+                                lblPivote.setText(""+col);
                             }else{
                                 
                             lblDatosP1.setText("Mientras la cabeza R/W pasaba del cilindro "+datosFB.cD1+" al "+datosFB.cD2+" se recorrieron "+datosFB.cantSR+" sectores"+" un total de "+datosFB.cantVueltas+"completas (ROJO)");
@@ -317,7 +319,7 @@ public class form_simulacion_busqueda extends javax.swing.JFrame {
                         cellPane.setBackground(Color.yellow);
                          lblDatosP1.setText("Por lo tanto el nuevo sector donde se encuentra la cabeza R/W es "+datosFB.secRest+"(AMARILLO)");
                         }
-                             if(col<datosFB.secRest-1&col!=datosFB.cantS){ 
+                             if(col<datosFB.secRest-1||col==datosFB.cantS){ 
                                  cellPane.setBackground(Color.RED);
                                  lblPivote.setText(""+col);
                              }
