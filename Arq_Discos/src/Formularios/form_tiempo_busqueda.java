@@ -6,6 +6,8 @@
 package Formularios;
 
 import java.awt.Color;
+import java.text.DecimalFormat;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,8 +20,25 @@ public class form_tiempo_busqueda extends javax.swing.JFrame {
      */
     public form_tiempo_busqueda() {
         initComponents();
-    }
 
+    }
+    
+    //Declaracion variables publicas para enviar al form simulacion busqueda
+    public static String cantPD="";
+    public static String cantC="";
+    public static String velR="";
+    public static String dirI="";
+    public static String dirF="";
+    public static String cantSD="";
+    public static String tbD="";
+    //Variables para uso de calculos de resultado
+    public static int secC=0,cantHeads=0,cantP=0,cantS=0,dirD1=0,dirD2=0,headD1=0,headD2=0,secD1=0,secD2=0,d1=0,d2=0;
+    public static int cD1=0,cD2=0,resD1=0,resD2=0,tBP=0,tB=0,cantSR=0,secD1Mov=0,secXR=0,totSecR=0,secRest=0,cantVueltas=0;
+    public static double x=0,tR=0,tTotRS=0,tTotD1D2=0;
+    //conocer si es un dato RPM o RPS
+    public static boolean rpsT=false;
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -29,6 +48,7 @@ public class form_tiempo_busqueda extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        bGVelR = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -37,7 +57,25 @@ public class form_tiempo_busqueda extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        rBRPM = new javax.swing.JRadioButton();
+        rBRPS = new javax.swing.JRadioButton();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        txtCantD = new javax.swing.JTextField();
+        txtCantC = new javax.swing.JTextField();
+        txtDirI = new javax.swing.JTextField();
+        txtVelR = new javax.swing.JTextField();
+        txtDirF = new javax.swing.JTextField();
+        btnTB = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        txtcantS = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        txtTB = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -121,23 +159,155 @@ public class form_tiempo_busqueda extends javax.swing.JFrame {
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 730, 40));
 
-        jLabel1.setText("tiempo de busqueda");
+        jLabel4.setText("Tiempo de búsqueda total de una direccion a otra en un disco duro en base a sus datos.");
+
+        jLabel5.setText("Cantidad de platos del disco*:");
+
+        jLabel6.setText("Cantidad de cilindros que contiene*:");
+
+        jLabel7.setText("Velocidad de giro*:");
+
+        bGVelR.add(rBRPM);
+        rBRPM.setText("RPM");
+        rBRPM.setName("radBRPM"); // NOI18N
+        rBRPM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rBRPMActionPerformed(evt);
+            }
+        });
+
+        bGVelR.add(rBRPS);
+        rBRPS.setText("RPS");
+        rBRPS.setName("radBRPS"); // NOI18N
+        rBRPS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rBRPSActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setText("Dirección inicial*:");
+
+        jLabel9.setText("Dirección final*:");
+
+        txtCantD.setName(""); // NOI18N
+
+        txtCantC.setName(""); // NOI18N
+
+        txtDirI.setName(""); // NOI18N
+
+        txtVelR.setName(""); // NOI18N
+
+        txtDirF.setName(""); // NOI18N
+
+        btnTB.setText("Calcular tiempo de busqueda");
+        btnTB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTBActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Cantidad de sectores por pista*:");
+
+        txtcantS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtcantSActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setText("Tiempo de búsqueda*:");
+
+        jLabel13.setText("ms");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(257, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(306, 306, 306))
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(66, 66, 66)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addGap(72, 72, 72)
+                                        .addComponent(txtCantD, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtTB, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel13))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(24, 24, 24)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel1))
+                                .addGap(35, 35, 35)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtDirF, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtDirI, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(txtCantC, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                .addComponent(txtcantS, javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(txtVelR, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(rBRPM)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(rBRPS))))))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(243, 243, 243)
+                        .addComponent(btnTB)))
+                .addContainerGap(128, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(197, 197, 197)
-                .addComponent(jLabel1)
-                .addContainerGap(259, Short.MAX_VALUE))
+                .addGap(40, 40, 40)
+                .addComponent(jLabel4)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtCantD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10)
+                    .addComponent(txtTB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(txtCantC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel7)
+                        .addGap(8, 8, 8)
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel9))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtcantS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(rBRPM)
+                            .addComponent(rBRPS)
+                            .addComponent(txtVelR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtDirI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtDirF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(btnTB)
+                .addContainerGap(202, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 40, 660, 470));
@@ -150,7 +320,9 @@ public class form_tiempo_busqueda extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 2, Short.MAX_VALUE))
         );
 
         pack();
@@ -196,6 +368,253 @@ public class form_tiempo_busqueda extends javax.swing.JFrame {
         jLabel3.setBackground(new Color (34,40,49));
     }//GEN-LAST:event_jLabel3MouseExited
 
+    private void rBRPSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rBRPSActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rBRPSActionPerformed
+
+    private void rBRPMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rBRPMActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rBRPMActionPerformed
+
+    private void btnTBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTBActionPerformed
+        // TODO add your handling code here:
+        //captura valores de los textbox
+        cantPD=txtCantD.getText();
+        cantC=txtCantC.getText();
+        velR=txtVelR.getText();
+        dirI=txtDirI.getText();
+        dirF=txtDirF.getText();
+        cantSD=txtcantS.getText();
+        tbD=txtTB.getText();
+        //variable si el recorrdio es mayor a los sectores de un cilindro
+        int secCIfM=0;
+
+        // asignar un decimalFormat para el tiempo de rotación
+        DecimalFormat df=new DecimalFormat("#.00");
+        //valida si RPS checkbox fue marcado
+        if(rBRPS.isSelected()){
+            rpsT=true;
+        }
+        //valida si los datos fueron ingresados correctamente
+        if(validarTB(cantPD, cantC, velR,dirI,dirF,cantSD,tbD)){
+            //validar que la direccion final o inicial no sobrepasen las direcciones maximas que puede tener el disco duro
+               //calcula la cantidad de cabezas por la cantidad de platos que se ingresaron
+               //captura cantidad de sectores
+               cantS=Integer.parseInt(cantSD);
+               //cantidad de platos y calculo de cabezas
+                cantP=Integer.parseInt(cantPD);
+                cantHeads=cantP*2;
+                
+               //Calcular sectores del cilindro
+                secC=cantHeads*cantS;
+               
+                int cantMax;
+                int cantCC=Integer.parseInt(cantC);
+                
+                cantMax=secC * cantCC;
+                
+             if(Integer.parseInt(dirI)>cantMax ||Integer.parseInt(dirF)>cantMax){
+                 JOptionPane.showMessageDialog(null,"La direccion inicial o final sobrepasa el maximo que puede tener el disco duro especificado");
+             }
+             else{
+            //proceso si fue marcado rpm
+            if(rpsT==false){
+                 
+                //capturar tiempo de busqueda 
+                tB=Integer.parseInt(tbD);
+                //captura la velocidad ingresada en rpm
+                int rpm=Integer.parseInt(velR);
+                //calcula el tiempo rotacional en ms
+                x=((60*1.0)/rpm)*1000;
+                tR=x/cantS;
+                //capturar direcciones
+                d1=Integer.parseInt(dirI);
+                d2=Integer.parseInt(dirF);
+                //calcular cilindro donde se ubica direccion inicial y guardamos su residuo
+                cD1=d1/secC;
+                resD1=d1%secC;
+                //calcular cabeza y sector direccion inicial
+                headD1=resD1/cantS;
+                secD1=resD1%cantS;
+                //calcular cilindro donde se ubica direccion Final y guardamos su residuo
+                cD2=d2/secC;
+                resD2=d2%secC;
+                //calcular cabeza y sector direccion FINAL
+                headD2=resD2/cantS;
+                secD2=resD2%cantS;
+               // JOptionPane.showMessageDialog(null,"D1: "+d1+" cilindo D1: "+cD1+" Head D1: "+headD1+" Sec D1: "+secD1+"D2: "+d2+" cilindo D2: "+cD2+" Head D1: "+headD2+" Sec D1: "+secD2+" Tiempo de rotacion:"+df.format(tR));
+            //Calcular tiempo de busqueda de petición
+            tBP=Math.abs((cD1-cD2))*tB;
+           // JOptionPane.showMessageDialog(null,"Tiempo de busqueda: "+tBP);
+            //Calcular cantidad de sectores recorridos
+            cantSR=(int) (tBP/tR);
+           // JOptionPane.showMessageDialog(null,"sectores recorridos"+cantSR);
+            //Calcular el sector al que se recorrio la Direccion inicial
+            secD1Mov=secD1+cantSR;
+            //Comparar si los sectores recorridos no sobrepasan los sectores maximos de un cilindro
+            if(secD1Mov>cantS){
+                for(int i=secD1Mov;i>cantS;i-=cantS){
+                   secCIfM=i; 
+                   cantVueltas++;
+                }
+                //realiza ultima resta que no hizo el ciclo for al ser ya menor
+               secRest=secCIfM-cantS; 
+               cantVueltas++;
+              // JOptionPane.showMessageDialog(null,"ubicacion sector actual"+secD1Mov);
+               //Verificar si quedo arriba o abajo del sector de destino
+            if(secRest>secD2){
+                //calcular sectores que faltan por recorrer para volver a la posicion 1
+                secXR=cantS-secRest;
+                //calcular total de sectores recorridos
+                totSecR=secXR+secD2;
+                //Calcular tiempo total por recorrer estos sectores
+                tTotRS=totSecR*tR;
+                tTotD1D2=tBP+tTotRS;
+               // JOptionPane.showMessageDialog(null,"tiempo total de busqueda fue mayor: "+tTotD1D2);
+            }
+            if(secRest<secD2){
+                totSecR=secD2-secRest;
+                 tTotRS=totSecR*tR;
+                tTotD1D2=tBP+tTotRS;
+               // JOptionPane.showMessageDialog(null,"tiempo total de busqueda fue menor: "+tTotD1D2);
+            }
+            if(secRest==secD2){
+               // JOptionPane.showMessageDialog(null,"tiempo total de busqueda: "+tR);
+               tTotD1D2=tR;
+            }
+                }//Sino era mayor el recorrido al maximo de cilindros
+            else{
+            //Verificar si quedo arriba o abajo del sector de destino
+            if(secD1Mov>secD2){
+                //calcular sectores que faltan por recorrer para volver a la posicion 1
+                secXR=cantS-secD1Mov;
+                //calcular total de sectores recorridos
+                totSecR=secXR+secD2;
+                //Calcular tiempo total por recorrer estos sectores
+                tTotRS=totSecR*tR;
+                tTotD1D2=tBP+tTotRS;
+               // JOptionPane.showMessageDialog(null,"tiempo total de busqueda: "+tTotD1D2);
+            }
+            if(secD1Mov<secD2){
+                totSecR=secD2-secD1Mov;
+                 tTotRS=totSecR*tR;
+                tTotD1D2=tBP+tTotRS;
+               // JOptionPane.showMessageDialog(null,"tiempo total de busqueda: "+tTotD1D2);
+            }
+            if(secD1Mov==secD2){
+               // JOptionPane.showMessageDialog(null,"tiempo total de busqueda: "+tR);
+               tTotD1D2=tR;
+            }
+            }
+                
+            }//proceso si fue marcado rps
+            else{
+                //capturar tiempo de busqueda 
+                tB=Integer.parseInt(tbD);
+                //captura la velocidad ingresada en rps
+                int rps=Integer.parseInt(velR);
+                //calcula el tiempo rotacional en ms
+                x=((1*1.0)/rps)*1000;
+                tR=x/cantS;
+                //capturar direcciones
+                d1=Integer.parseInt(dirI);
+                d2=Integer.parseInt(dirF);
+                //calcular cilindro donde se ubica direccion inicial y guardamos su residuo
+                cD1=d1/secC;
+                resD1=d1%secC;
+                //calcular cabeza y sector direccion inicial
+                headD1=resD1/cantS;
+                secD1=resD1%cantS;
+                //calcular cilindro donde se ubica direccion Final y guardamos su residuo
+                cD2=d2/secC;
+                resD2=d2%secC;
+                //calcular cabeza y sector direccion FINAL
+                headD2=resD2/cantS;
+                secD2=resD2%cantS;
+                //JOptionPane.showMessageDialog(null,"D1: "+d1+" cilindo D1: "+cD1+" Head D1: "+headD1+" Sec D1: "+secD1+"D2: "+d2+" cilindo D2: "+cD2+" Head D1: "+headD2+" Sec D1: "+secD2+" Tiempo de rotacion:"+df.format(tR));
+            //Calcular tiempo de busqueda de petición
+            tBP=Math.abs((cD1-cD2))*tB;
+            //JOptionPane.showMessageDialog(null,"Tiempo de busqueda: "+tBP);
+            //Calcular cantidad de sectores recorridos
+            cantSR=(int) (tBP/tR);
+            //JOptionPane.showMessageDialog(null,"sectores recorridos"+cantSR);
+            //Calcular el sector al que se recorrio la Direccion inicial
+            secD1Mov=secD1+cantSR;
+            //Comparar si los sectores recorridos no sobrepasan los sectores maximos de un cilindro
+            if(secD1Mov>cantS){
+                for(int i=secD1Mov;i>cantS;i-=cantS){
+                   secCIfM=i; 
+                   cantVueltas++;
+                }
+                //realiza ultima resta que no hizo el ciclo for al ser ya menor
+               secRest=secCIfM-cantS; 
+               cantVueltas++;
+               //JOptionPane.showMessageDialog(null,"ubicacion sector actual"+secD1Mov);
+               //Verificar si quedo arriba o abajo del sector de destino
+            if(secRest>secD2){
+                //calcular sectores que faltan por recorrer para volver a la posicion 1
+                secXR=cantS-secRest;
+                //calcular total de sectores recorridos
+                totSecR=secXR+secD2;
+                //Calcular tiempo total por recorrer estos sectores
+                tTotRS=totSecR*tR;
+                tTotD1D2=tBP+tTotRS;
+                //JOptionPane.showMessageDialog(null,"tiempo total de busqueda fue mayor: "+tTotD1D2);
+            }
+            if(secRest<secD2){
+                totSecR=secD2-secRest;
+                 tTotRS=totSecR*tR;
+                tTotD1D2=tBP+tTotRS;
+                //JOptionPane.showMessageDialog(null,"tiempo total de busqueda fue menor: "+tTotD1D2);
+            }
+            if(secD1Mov==secD2){
+                //JOptionPane.showMessageDialog(null,"tiempo total de busqueda: "+tR);
+                tTotD1D2=tR;
+                
+            }
+                }//Sino era mayor el recorrido al maximo de cilindros
+            else{
+            //Verificar si quedo arriba o abajo del sector de destino
+            if(secD1Mov>secD2){
+                //calcular sectores que faltan por recorrer para volver a la posicion 1
+                secXR=cantS-secD1Mov;
+                //calcular total de sectores recorridos
+                totSecR=secXR+secD2;
+                //Calcular tiempo total por recorrer estos sectores
+                tTotRS=totSecR*tR;
+                tTotD1D2=tBP+tTotRS;
+               // JOptionPane.showMessageDialog(null,"tiempo total de busqueda: "+tTotD1D2);
+            }
+            if(secD1Mov<secD2){
+                totSecR=secD2-secD1Mov;
+                 tTotRS=totSecR*tR;
+                tTotD1D2=tBP+tTotRS;
+               // JOptionPane.showMessageDialog(null,"tiempo total de busqueda: "+tTotD1D2);
+            }
+            if(secD1Mov==secD2){
+                //JOptionPane.showMessageDialog(null,"tiempo total de busqueda: "+tR);
+                tTotD1D2=tR;
+            }
+            }
+            //mostrar simulacion del proceso
+            form_simulacion_busqueda form= new form_simulacion_busqueda();
+            form.setVisible(true);
+            dispose();
+           }
+        }
+        }else{
+            JOptionPane.showMessageDialog(null,"Asegurese de ingresar y marcar todos los datos correctamente, deben ser enteros POSITIVOS");
+        }
+    }//GEN-LAST:event_btnTBActionPerformed
+
+    
+    private void txtcantSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcantSActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtcantSActionPerformed
+
+    public static boolean validarTB(String cadena,String cadena2, String cadena3, String cadena4, String cadena5, String cadena6, String cadena7 ){       
+        return cadena.matches("[0-9,]*")& cadena2.matches("[0-9]*")& cadena3.matches("[0-9]*")& cadena4.matches("[0-9]*")& cadena5.matches("[0-9]*")& cadena6.matches("[0-9]*")& cadena7.matches("[0-9]*")&!cadena.equals("")&!cadena2.equals("")&!cadena3.equals("")&!cadena4.equals("")&!cadena5.equals("")&!cadena6.equals("")&!cadena7.equals("");
+    }
     /**
      * @param args the command line arguments
      */
@@ -222,25 +641,46 @@ public class form_tiempo_busqueda extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(form_tiempo_busqueda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
+        //</editor-fold>    
+        
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new form_tiempo_busqueda().setVisible(true);
+                
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup bGVelR;
+    private javax.swing.JButton btnTB;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JRadioButton rBRPM;
+    private javax.swing.JRadioButton rBRPS;
+    private javax.swing.JTextField txtCantC;
+    private javax.swing.JTextField txtCantD;
+    private javax.swing.JTextField txtDirF;
+    private javax.swing.JTextField txtDirI;
+    private javax.swing.JTextField txtTB;
+    private javax.swing.JTextField txtVelR;
+    private javax.swing.JTextField txtcantS;
     // End of variables declaration//GEN-END:variables
 }
