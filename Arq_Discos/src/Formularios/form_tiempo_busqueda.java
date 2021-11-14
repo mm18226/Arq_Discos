@@ -567,7 +567,7 @@ public class form_tiempo_busqueda extends javax.swing.JFrame {
                 tTotD1D2=tBP+tTotRS;
                 //JOptionPane.showMessageDialog(null,"tiempo total de busqueda fue menor: "+tTotD1D2);
             }
-            if(secD1Mov==secD2){
+            if(secRest==secD2){
                 //JOptionPane.showMessageDialog(null,"tiempo total de busqueda: "+tR);
                 tTotD1D2=tR;
                 

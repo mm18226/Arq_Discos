@@ -38,6 +38,7 @@ public class form_simulacion_busqueda extends javax.swing.JFrame {
         //inicialiar componentes 
          tableDatosD.setVisible(true);
         tableDatosD.setEnabled(false);
+        lblPivote.setVisible(false);
         //crear instancia de form tiempo de busqueda para traer datos
         form_tiempo_busqueda datosFB=new form_tiempo_busqueda();
         //llamado a funcion para mostrar proceso al usuario
@@ -80,7 +81,7 @@ public class form_simulacion_busqueda extends javax.swing.JFrame {
             public void run(){
                 for(int i=1;i<=100;i++){
                     try{
-                        Thread.sleep(150);
+                        Thread.sleep(200);
                         progressB.setValue(i);
                         
                     }catch (InterruptedException ex){
@@ -152,10 +153,24 @@ public class form_simulacion_busqueda extends javax.swing.JFrame {
                                           
                     }
                     //Mostrar Pista 1
-                    if(progressB.getValue()==62){
-                        mostrarPD1(datosFB);
-                                                            
+                    if(progressB.getValue()==85){
+                        
+                           dibujarCabezaFinal(datosFB);                                 
                     }
+                    if(progressB.getValue()==90){
+                        
+                           dibujarCilindroFinal(datosFB);                                 
+                    }
+                    if(progressB.getValue()==95){
+                        
+                           lblTT.setText("Tiempo total para cumplir el pedido:");  
+                           lblFormula.setText("T=tiempo de cilindro a cilindro+ recorrido de sectores"); 
+                    }
+                    if(progressB.getValue()==100){
+                        
+                           lblResultado.setText("T= "+datosFB.tBP+"ms +"+datosFB.tTotRS+"ms = "+datosFB.tTotD1D2+"ms");
+                    }
+                    
                 }
             }
             
@@ -172,6 +187,7 @@ public class form_simulacion_busqueda extends javax.swing.JFrame {
         fila1[2]=datosFB.headD1; 
         fila1[3]=datosFB.secD1; 
         modelo.addRow(fila1); 
+        
         this.tableDatosD.setModel(modelo); 
         //mostrar Pista direccion inicial
          this.mostrarPista1.setLayout(new BorderLayout());
@@ -193,7 +209,7 @@ public class form_simulacion_busqueda extends javax.swing.JFrame {
          this.mostrarPista2.setLayout(new BorderLayout());
           this.mostrarPista2.add(new TestPaneII(datosFB));
     }
-    //dibujar representacion de cabeza
+    //dibujar representacion de cabeza Inicial
     private void dibujarCabezaInicial( form_tiempo_busqueda datosFB){
         Graphics2D cabeza=(Graphics2D)this.mostrarCabeza.getGraphics();
         cabeza.setStroke(new BasicStroke(10.f));
@@ -201,12 +217,31 @@ public class form_simulacion_busqueda extends javax.swing.JFrame {
         cabeza.fillOval(10, 2, 60, 60);//orden xpanel,ypanel,grande segun radio,igual al anterior
         lblUH.setText("Al iniciar la dirección "+datosFB.dirI+" se encuentra en la cabeza "+datosFB.headD1);
     }
+    //Dibujar Cilindro direccion Inicial
         private void dibujarCilindroInicial(form_tiempo_busqueda datosFB ){
         Graphics2D cabeza=(Graphics2D)this.cilindroP.getGraphics();
         cabeza.setStroke(new BasicStroke(10.f));
         cabeza.setPaint(Color.blue);
         cabeza.drawOval(10, 5, 50, 50);//orden xpanel,ypanel,grande segun radio,igual al anterior
         lblUC.setText("En la cabeza "+datosFB.headD1+" la direccion se encuentra en su cilindro "+datosFB.cD1);
+                
+        }
+        
+            //dibujar representacion de cabeza Final
+    private void dibujarCabezaFinal( form_tiempo_busqueda datosFB){
+        Graphics2D cabeza=(Graphics2D)this.mostrarCabeza.getGraphics();
+        cabeza.setStroke(new BasicStroke(10.f));
+        cabeza.setPaint(Color.pink);
+        cabeza.fillOval(10, 2, 60, 60);//orden xpanel,ypanel,grande segun radio,igual al anterior
+        lblUH.setText("Al iniciar la dirección "+datosFB.dirF+" se encuentra en la cabeza "+datosFB.headD2);
+    }
+    //Dibujar Cilindro direccion Final
+        private void dibujarCilindroFinal(form_tiempo_busqueda datosFB ){
+        Graphics2D cabeza=(Graphics2D)this.cilindroP.getGraphics();
+        cabeza.setStroke(new BasicStroke(10.f));
+        cabeza.setPaint(Color.green);
+        cabeza.drawOval(10, 5, 50, 50);//orden xpanel,ypanel,grande segun radio,igual al anterior
+        lblUC.setText("En la cabeza "+datosFB.headD2+" la direccion se encuentra en su cilindro "+datosFB.cD2);
                 
         }
         
@@ -220,6 +255,7 @@ public class form_simulacion_busqueda extends javax.swing.JFrame {
                 Thread hilo = new Thread(){
             @Override
             public void run(){
+                //bandera para cambio al moverse demasiados sectores
                 boolean cambio=false;
                             setLayout(new GridBagLayout());
             GridBagConstraints gbc = new GridBagConstraints();
@@ -227,7 +263,7 @@ public class form_simulacion_busqueda extends javax.swing.JFrame {
                     try{
                 for (int col = 0; col < datosFB.cantS; col++) {
                     
-                        Thread.sleep(90);
+                        Thread.sleep(200);
                         gbc.gridx = col;
                         gbc.gridy = row;
 
@@ -247,23 +283,24 @@ public class form_simulacion_busqueda extends javax.swing.JFrame {
                         }
                     }
                     //colocar donde se encuentra el sector 1
-        
+                    if (col==datosFB.secD1-1){                        
+                            cellPane.setBackground(Color.BLUE);
+                            lblDatosP1.setText("El sector actual donde se encuentra la direccion "+datosFB.dirI+" es: "+datosFB.secD1+"(AZUL)");
+                    }
                     //validar si el recorrdio mientras cambia de cilindro se desbordo
                     if(datosFB.secD1Mov>datosFB.cantS){
                         //pintar y mostrar el total de recorrido
-                        if (col==datosFB.secD1-1){                        
-                        cellPane.setBackground(Color.BLUE);
-                        lblDatosP1.setText("El sector actual donde se encuentra la direccion "+datosFB.dirI+" es: "+datosFB.secD1);
-                    }
+                            
+                    
                         if(cambio==false){
                             if(col!=datosFB.cantS-1&col!=datosFB.secD1-1){
                                 cellPane.setBackground(Color.RED);
-                            lblDatosP1.setText("Mientras la cabeza R/W pasaba del cilindro "+datosFB.cD1+" al "+datosFB.cD2+" se recorrieron "+datosFB.cantSR+" sectores"+" un total de "+datosFB.cantVueltas+"completas");
+                            lblDatosP1.setText("Mientras la cabeza R/W pasaba del cilindro "+datosFB.cD1+" al "+datosFB.cD2+" se recorrieron "+datosFB.cantSR+" sectores"+" un total de "+datosFB.cantVueltas+"completas (ROJO)");
                             } else{
                             if(col==datosFB.cantS-1){
                                 cellPane.setBackground(Color.RED);
-                                lblDatosP1.setText("se hizo el CAMBIOOOOOOOO");
-                                col=0;
+                                
+                                col=-1;
                                 cambio=true;
                             }
                             }   
@@ -271,11 +308,13 @@ public class form_simulacion_busqueda extends javax.swing.JFrame {
                            if(cambio==true){     
                          if(col==datosFB.secRest-1){     
                         cellPane.setBackground(Color.yellow);
-                         lblDatosP1.setText("Por lo tanto el nuevo sector donde se encuentra la cabeza R/W es "+datosFB.secRest);
+                         lblDatosP1.setText("Por lo tanto el nuevo sector donde se encuentra la cabeza R/W es "+datosFB.secRest+"(AMARILLO)");
                         }else{
-                             if(col<datosFB.secRest-1){ 
+                             if(col<datosFB.secRest-1 & col!=datosFB.secRest-1){ 
                                  cellPane.setBackground(Color.RED);
+                                 lblPivote.setText(""+col);
                              }
+                             
                              
                          }
                        } 
@@ -284,16 +323,16 @@ public class form_simulacion_busqueda extends javax.swing.JFrame {
                     }else{
                         if (col==datosFB.secD1-1){                        
                         cellPane.setBackground(Color.BLUE);
-                        lblDatosP1.setText("El sector actual donde se encuentra la direccion "+datosFB.dirI+" es: "+datosFB.secD1);
+                        lblDatosP1.setText("El sector actual donde se encuentra la direccion "+datosFB.dirI+" es: "+datosFB.secD1+"(AZUL)");
                     }
                         //si el recorrido era menor
                     if(col>=datosFB.secD1&col<datosFB.secD1Mov){
                         cellPane.setBackground(Color.RED);
-                        lblDatosP1.setText("Mientras la cabeza R/W pasaba del cilindro "+datosFB.cD1+" al "+datosFB.cD2+" se recorrieron "+datosFB.cantSR+" sectores");
+                        lblDatosP1.setText("Mientras la cabeza R/W pasaba del cilindro "+datosFB.cD1+" al "+datosFB.cD2+" se recorrieron "+datosFB.cantSR+" sectores"+"(ROJO)");
                     }
                     if(col==datosFB.secD1Mov-1){
                         cellPane.setBackground(Color.yellow);
-                         lblDatosP1.setText("Por lo tanto el nuevo sector donde se encuentra la cabeza R/W es "+datosFB.secD1Mov);
+                         lblDatosP1.setText("Por lo tanto el nuevo sector donde se encuentra la cabeza R/W es "+datosFB.secD1Mov+"(AMARILLO)");
                     }
                     }
                     
@@ -319,13 +358,15 @@ public class form_simulacion_busqueda extends javax.swing.JFrame {
                 Thread hilo = new Thread(){
             @Override
             public void run(){
+                //Bandera para conocer si ya se encontraron el sector al que se quiere llegar y en el que se estaba
+                boolean encontrados=false;
                             setLayout(new GridBagLayout());
             GridBagConstraints gbc = new GridBagConstraints();
                 for (int row = 0; row < 1; row++) {
                     try{
                 for (int col = 0; col < datosFB.cantS; col++) {
                     
-                        Thread.sleep(90);
+                        Thread.sleep(200);
                         gbc.gridx = col;
                         gbc.gridy = row;
 
@@ -345,21 +386,144 @@ public class form_simulacion_busqueda extends javax.swing.JFrame {
                         }
                     }
                     //Mostrar sector donde se encuentra
-                    if (col==datosFB.secD2){                        
+                    if (col==datosFB.secD2-1){                        
                         cellPane.setBackground(Color.BLUE);
-                        lblDatosP2.setText("El sector actual donde se encuentra la direccion "+datosFB.dirF+" es: "+datosFB.secD2);
-                    }//Validar si debe pintarse hacia adelante o hacia atras
+                        lblDatosP2.setText("El sector actual donde se encuentra la direccion "+datosFB.dirF+" es: "+datosFB.secD2+"(AZUL)");
+                    }
+                    //Validar si deben usarse variable desbordada o no
+                    if(datosFB.secD1Mov>datosFB.cantS){
+                            //Validar si debe pintarse hacia adelante o hacia atras
+                            //si el DF esta adelante del DI
+                    if(datosFB.secRest>datosFB.secD2){
+                        
+                        if(encontrados==false){
+                            if(col==datosFB.secRest-1){
+                                cellPane.setBackground(Color.yellow);
+                                lblDatosP2.setText("La cantidad de sectores por moverse la cabeza R/W para llegar al destino son: "+datosFB.totSecR+"(VERDE)");
+                                
+                            }else{
+                                if(col==datosFB.cantS-1){
+                                col=-1;
+                                 encontrados=true;
+                            }
+                                lblDatosP2.setText("Mientras la cabeza R/W pasaba del cilindro "+datosFB.cD1+" al "+datosFB.cD2+" se recorrieron "+datosFB.secD1Mov+" sectores");
+                            }
+                        }else{
+                            if(encontrados==true){
+                                if(col>=datosFB.secRest||col<datosFB.secD2-1){
+                                    cellPane.setBackground(Color.green);
+                                    lblDatosP2.setText("El color verde representa los sectores que recorrio hasta llegar al destino: "+datosFB.totSecR+"(AMARILLO)");
+                                lblPivote.setText(""+col);
+                                } 
+                                if(col==datosFB.secRest-1){
+                                    cellPane.setBackground(Color.yellow);
+                                    lblPivote.setText(""+col);
+                                }
+                            }
+                            
+                        }
+                    }
+                    //si el DF esta detras del DI
+                    if(datosFB.secRest<datosFB.secD2){
+                        if(encontrados==false){
+                            if(col==datosFB.secRest-1){
+                                cellPane.setBackground(Color.yellow);
+                                lblDatosP2.setText("La cantidad de sectores por moverse la cabeza R/W para llegar al destino son: "+datosFB.totSecR);
+                                lblPivote.setText(""+col);
+                            }else{
+                                if(col==datosFB.cantS-1){
+                                col=-1;
+                                 encontrados=true;
+                            }
+                                lblDatosP2.setText("Mientras la cabeza R/W pasaba del cilindro "+datosFB.cD1+" al "+datosFB.cD2+" se recorrieron "+datosFB.secD1Mov+" sectores"+"(VERDE)");
+                            }
+                        }else{
+                            if(encontrados==true){
+                                if(col>=datosFB.secD2&col<datosFB.secRest-1){
+                                    cellPane.setBackground(Color.green);
+                                    lblDatosP2.setText("El color verde representa los sectores que recorrio hasta llegar al destino: "+datosFB.totSecR+"(AMARILLO)");
+                                lblPivote.setText(""+col);
+                                }
+                            }
+                            
+                        }
+                    }
+                    //Si estan en la misma dirección
+                    if(datosFB.secRest==datosFB.secD2){
+                        if(col==datosFB.secRest-1){
+                                cellPane.setBackground(Color.PINK);
+                                lblDatosP2.setText("Ambas direcciones estan en el mismo sector asi que no hay mas movimiento");
+                    lblPivote.setText(""+col);
+                        }
+                    
+                    }//Sino se desbordo
+                    }else{
+                        //Validar si debe pintarse hacia adelante o hacia atras
+                            //si el DF esta adelante del DI
                     if(datosFB.secD1Mov>datosFB.secD2){
-                        if(col>datosFB.secD1&col<datosFB.secD1Mov){
-                        cellPane.setBackground(Color.RED);
-                        lblDatosP2.setText("Mientras la cabeza R/W pasaba del cilindro "+datosFB.cD1+" al "+datosFB.cD2+" se recorrieron "+datosFB.cantSR+" sectores");
+                        
+                        if(encontrados==false){
+                            if(col==datosFB.secD1Mov-1){
+                                cellPane.setBackground(Color.yellow);
+                                lblDatosP2.setText("La cantidad de sectores por moverse la cabeza R/W para llegar al destino son: "+datosFB.totSecR);
+                                lblPivote.setText(""+col);
+                            }else{
+                                if(col==datosFB.cantS-1){
+                                col=-1;
+                                 encontrados=true;
+                            }
+                                lblDatosP2.setText("Mientras la cabeza R/W pasaba del cilindro "+datosFB.cD1+" al "+datosFB.cD2+" se recorrieron "+datosFB.secD1Mov+" sectores"+"(VERDE)");
+                            }
+                        }else{
+                            if(encontrados==true){
+                                if(col>=datosFB.secD1Mov||col<datosFB.secD2-1){
+                                    cellPane.setBackground(Color.green);
+                                    lblDatosP2.setText("El color verde representa los sectores que recorrio hasta llegar al destino: "+datosFB.totSecR+"(AMARILLO)");
+                                lblPivote.setText(""+col);
+                                }
+                                if(col==datosFB.secD1Mov-1){
+                                    cellPane.setBackground(Color.yellow);
+                                    lblPivote.setText(""+col);
+                                }
+                            }
+                            
+                        }
+                    }
+                    //si el DF esta detras del DI
+                    if(datosFB.secD1Mov<datosFB.secD2){
+                        if(encontrados==false){
+                            if(col==datosFB.secD1Mov-1){
+                                cellPane.setBackground(Color.yellow);
+                                lblDatosP2.setText("La cantidad de sectores por moverse la cabeza R/W para llegar al destino sooooooooOOOOOOn: "+datosFB.totSecR);
+                                
+                            }else{
+                                if(col==datosFB.cantS-1){
+                                col=-1;
+                                 encontrados=true;
+                            }
+                                lblDatosP2.setText("Mientras la cabeza R/W pasaba del cilindro "+datosFB.cD1+" al "+datosFB.cD2+" se recorrieron "+datosFB.secD1Mov+" sectores");
+                            }
+                        }else{
+                            if(encontrados==true){
+                                if(col>=datosFB.secD2&col<datosFB.secD1Mov-1){
+                                    cellPane.setBackground(Color.green);
+                                    lblDatosP2.setText("El color verde representa los sectores que recorrio hasta llegar al destino: "+datosFB.totSecR);
+                                lblPivote.setText(""+col);
+                                }
+                            }
+                            
+                        }
+                    }
+                    //Si estan en la misma dirección
+                    if(datosFB.secD1Mov==datosFB.secD2){
+                        if(col==datosFB.secD1Mov-1){
+                                cellPane.setBackground(Color.PINK);
+                                lblDatosP2.setText("Ambas direcciones estan en el mismo sector asi que no hay mas movimiento");
+                    lblPivote.setText(""+col);
+                        }
+                    }
                     }
                     
-                    }//Mostrar en que sector se encontraba la cabeza R/W
-                    if(col>datosFB.secD1&col==datosFB.secD1Mov){
-                        cellPane.setBackground(Color.red);
-                         lblDatosP2.setText("La cantidad de sectores por moverse la cabeza R/W para llegar al destino son: "+datosFB.totSecR);
-                    }
                     cellPane.setBorder(border);
                     add(cellPane, gbc);
                         
@@ -394,12 +558,7 @@ public class form_simulacion_busqueda extends javax.swing.JFrame {
     
          }
          
-         
-      //Mostrar pista
-         
-         public  void mostrarPD1(form_tiempo_busqueda datosFB){
-               
-         }
+
          
 
          
@@ -434,6 +593,10 @@ public class form_simulacion_busqueda extends javax.swing.JFrame {
         lblDatosP1 = new javax.swing.JLabel();
         mostrarPista2 = new javax.swing.JPanel();
         lblDatosP2 = new javax.swing.JLabel();
+        lblPivote = new javax.swing.JLabel();
+        lblTT = new javax.swing.JLabel();
+        lblFormula = new javax.swing.JLabel();
+        lblResultado = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -588,6 +751,8 @@ public class form_simulacion_busqueda extends javax.swing.JFrame {
             .addGap(0, 28, Short.MAX_VALUE)
         );
 
+        lblPivote.setText("jLabel3");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -605,41 +770,62 @@ public class form_simulacion_busqueda extends javax.swing.JFrame {
                                 .addGap(30, 30, 30)
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblProcesoAct, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(134, 134, 134)
+                                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(lblTT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(lblFormula, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(lblResultado, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)))))))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(34, 34, 34)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(lblUH, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
-                                    .addComponent(lblUC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGap(118, 118, 118)
                                 .addComponent(mostrarCabeza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGap(118, 118, 118)
-                                .addComponent(cilindroP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(cilindroP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(47, 47, 47)
-                                .addComponent(lblDatosP1, javax.swing.GroupLayout.DEFAULT_SIZE, 606, Short.MAX_VALUE))
+                                .addGap(34, 34, 34)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblPivote)
+                                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(lblUH, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
+                                        .addComponent(lblUC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(mostrarPista2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(lblDatosP1, javax.swing.GroupLayout.PREFERRED_SIZE, 582, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(24, 24, 24))
                                     .addComponent(mostrarPista1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblDatosP2, javax.swing.GroupLayout.DEFAULT_SIZE, 647, Short.MAX_VALUE))))))
+                                    .addComponent(mostrarPista2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblDatosP2, javax.swing.GroupLayout.PREFERRED_SIZE, 606, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(20, 20, 20)))))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(progressB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(progressB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPivote))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblProcesoAct, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(lblTT, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblFormula, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblUH, javax.swing.GroupLayout.DEFAULT_SIZE, 15, Short.MAX_VALUE)
@@ -649,14 +835,16 @@ public class form_simulacion_busqueda extends javax.swing.JFrame {
                     .addComponent(mostrarCabeza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(mostrarPista1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(lblUC, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblUC, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblDatosP2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(lblDatosP2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14)
+                        .addComponent(cilindroP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(mostrarPista2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(cilindroP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(mostrarPista2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(587, 587, 587)
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -768,7 +956,11 @@ public class form_simulacion_busqueda extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblDatosP1;
     private javax.swing.JLabel lblDatosP2;
+    private javax.swing.JLabel lblFormula;
+    private javax.swing.JLabel lblPivote;
     private javax.swing.JLabel lblProcesoAct;
+    private javax.swing.JLabel lblResultado;
+    private javax.swing.JLabel lblTT;
     private javax.swing.JLabel lblUC;
     private javax.swing.JLabel lblUH;
     private javax.swing.JPanel mostrarCabeza;
