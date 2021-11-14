@@ -17,8 +17,10 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;;
+import javax.swing.UnsupportedLookAndFeelException;import javax.swing.table.DefaultTableModel;
+;
 
 
 
@@ -33,6 +35,8 @@ public class form_algoritmo_planificacion extends javax.swing.JFrame {
      */
     public form_algoritmo_planificacion() {
         initComponents();
+        buttonGroup1.add(jRadioButton1);
+        buttonGroup1.add(jRadioButton2);
     }
 
     /**
@@ -44,6 +48,9 @@ public class form_algoritmo_planificacion extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
+        buttonGroup3 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel0 = new javax.swing.JLabel();
@@ -61,6 +68,23 @@ public class form_algoritmo_planificacion extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jTextField3 = new javax.swing.JTextField();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
+        jLabel9 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaDatos = new javax.swing.JTable();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        labelFCFS = new javax.swing.JLabel();
+        labelSCAN = new javax.swing.JLabel();
+        labelCSCAN = new javax.swing.JLabel();
+        labelCLOOK = new javax.swing.JLabel();
+        labelSSTF = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -138,11 +162,11 @@ public class form_algoritmo_planificacion extends javax.swing.JFrame {
         });
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 250, 50));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 510));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 530));
 
         jPanel3.setBackground(new java.awt.Color(83, 184, 187));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 730, 40));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 740, 40));
 
         jLabel1.setText("ALGORITMO DE PLANIFICACION");
 
@@ -175,58 +199,175 @@ public class form_algoritmo_planificacion extends javax.swing.JFrame {
 
         jLabel7.setText("* tener en cuenta que la cola comienza desde 1 y el final es la cantidad de sectores. ");
 
+        jLabel8.setText("Sector donde se encuentra la cabeza del disco:");
+
+        buttonGroup1.add(jRadioButton1);
+        jRadioButton1.setSelected(true);
+        jRadioButton1.setText("Arriba");
+
+        buttonGroup1.add(jRadioButton2);
+        jRadioButton2.setText("Abajo");
+
+        jLabel9.setText("Direccion de la cabeza: ");
+
+        tablaDatos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"Promedio", "Promedio", "Promedio", "Promedio", "Promedio"}
+            },
+            new String [] {
+                "FCFS", "SCAN", "CSCAN", "CLOOK", "SSTF"
+            }
+        ));
+        jScrollPane1.setViewportView(tablaDatos);
+
+        jLabel10.setText("Cola resultado FCFS:");
+
+        jLabel13.setText("Cola resultado SCAN:");
+
+        jLabel14.setText("Cola resultado CSCAN:");
+
+        jLabel15.setText("Cola resultado CLOOK:");
+
+        jLabel16.setText("Cola resultado SSTF:");
+
+        labelFCFS.setText("Esperando proceso...");
+        labelFCFS.setEnabled(false);
+
+        labelSCAN.setText("Esperando proceso...");
+        labelSCAN.setEnabled(false);
+
+        labelCSCAN.setText("Esperando proceso...");
+        labelCSCAN.setEnabled(false);
+
+        labelCLOOK.setText("Esperando proceso...");
+        labelCLOOK.setEnabled(false);
+
+        labelSSTF.setText("Esperando proceso...");
+        labelSSTF.setEnabled(false);
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(247, 247, 247))
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(74, 74, 74)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1)
                             .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField2))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 98, Short.MAX_VALUE))
+                                .addGap(2, 2, 2)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(jPanel4Layout.createSequentialGroup()
+                                            .addComponent(jLabel8)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(jTextField3))
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
+                                            .addComponent(jLabel5)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jTextField2))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
+                                            .addComponent(jLabel2)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(jTextField1)))
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 522, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(labelFCFS)
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addComponent(jRadioButton1)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jRadioButton2))
+                                    .addComponent(labelCSCAN)
+                                    .addComponent(labelSCAN)
+                                    .addComponent(labelCLOOK)))))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel14)
+                            .addComponent(jLabel10))))
+                .addContainerGap(127, Short.MAX_VALUE))
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
+                        .addGap(247, 247, 247))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel15)
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel16))
+                        .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(149, 149, 149)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelSSTF)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(7, 7, 7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRadioButton1)
+                    .addComponent(jRadioButton2)
+                    .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
-                .addContainerGap(281, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(labelFCFS))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(labelCSCAN))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(labelSCAN))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(labelCLOOK))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(labelSSTF))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 40, 660, 470));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 40, 670, 490));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -243,48 +384,9 @@ public class form_algoritmo_planificacion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     //Inicio de cuadricula
-    public static class Grid extends JPanel {
-
-        //creando una lista de cordenadas llamada fillCells
-        private List<Point> fillCells;
-        
-        //Constructor de Grid
-        public Grid() {
-            //
-            fillCells = new ArrayList<>(25);
-        }
-
-        @Override
-        protected void paintComponent(Graphics g) {
-            super.paintComponent(g);
-            for (Point fillCell : fillCells) {
-                int cellX = 10 + (fillCell.x * 10);
-                int cellY = 10 + (fillCell.y * 10);
-                g.setColor(Color.BLACK);
-                g.fillRect(cellX, cellY, 10, 10);
-                }
-            
-            g.setColor(Color.BLUE);
-            g.drawRect(10, 10, 800, 500);
-
-            for (int i = 10; i <= 800; i += 10) {
-                g.drawLine(i, 10, i, 510);
-            }
-
-            for (int i = 10; i <= 500; i += 10) {
-                g.drawLine(10, i, 810, i);
-            }
-        }
-
-        public void fillCell(int x, int y) {            
-            fillCells.add(new Point(x, y));
-            repaint();
-        }
-    } 
+   
     //Fin cuadricula Intento
-    
-
-    
+     
     
     private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
         formPrincipal form= new formPrincipal();
@@ -326,81 +428,153 @@ public class form_algoritmo_planificacion extends javax.swing.JFrame {
         jLabel3.setBackground(new Color (34,40,49));
     }//GEN-LAST:event_jLabel3MouseExited
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      
-                /*Grid grid = new Grid();
-       
-                JFrame window = new JFrame();
-                window.setSize(840, 560);
-                window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                window.add(grid);      */              
-                 
-                //retomamos los datos de los testfield
-                String cola =jTextField1.getText();  
-                String cadena2=jTextField2.getText();
-                //dividimos en un arreglo de cadenas la cola de direcciones
-                String[] numArray = cola.split(","); 
-                //sacaos el tamaño del arreglo
-                int tamaño=numArray.length;  
-                int filas=0;
-                filas= Integer.parseInt(cadena2)/100;
-                int row[] = new int[tamaño];
-                int col[]=new int[tamaño];
-                
-                
-                 if(validar(cola,cadena2)){
-                     if (validar2(numArray,cadena2)){
-                     for (int i=0;i<tamaño;i++) {
-                 String datos []=new String[2];
-                 
-                 //separamos cada datos para identificar columna y fila, lo retoma el arreglo de enteros.
-                 datos= separar(numArray[i]);
-                 int fil =Integer.parseInt(datos[1]);
-                 int colu=Integer.parseInt(datos[0]);
-                 
-                 col[i]=fil;
-                 row[i]=colu;
-                 JOptionPane.showMessageDialog(null,"Entero"+row[i]+"Decimal "+col[i]);
-                 }
-                   
-                
-                TestGrid02 prueba = new TestGrid02(filas,row,col);                
-                }
-                     else{JOptionPane.showMessageDialog(null,"Existe un dato en cola no aceptado en la capacidad de sectores");
-                    jTextField1.setText(null);
-                    jTextField2.setText(null);}
-                 }
-                  else {
-                    JOptionPane.showMessageDialog(null,"Datos no proporcionados correctamente, revisar el formato");
-                    jTextField1.setText(null);
-                    jTextField2.setText(null);
-                }
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-    public static boolean validar(String cadena,String cadena2 ){       
-        return cadena.matches("[0-9,]*")& cadena2.matches("[0-9]*")&!cadena.equals("")&!cadena2.equals("");
+        //retomamos los datos de los testfield
+        String cola =jTextField1.getText();
+        String cadena2=jTextField2.getText();
+        String puntero=jTextField3.getText();
+        boolean arriba=jRadioButton1.isSelected();
+        //dividimos en un arreglo de cadenas la cola de direcciones
+        String[] numArray = cola.split(",");
+        //sacaos el tamaño del arreglo
+        int tamaño=numArray.length;
+        int filas=0;
+        int cabeza=0;
+        int cantidad;
+
+        int row[] = new int[tamaño];
+        int col[]=new int[tamaño];
+
+        int planificacion[]=new int[tamaño];
+
+        if(validar(cola,cadena2,puntero)){
+            if (validar2(numArray,cadena2,puntero)){
+                filas= Integer.parseInt(cadena2)/100;
+                cabeza=Integer.parseInt(puntero);
+                cantidad=Integer.parseInt(cadena2);
+                for (int i=0;i<tamaño;i++) {
+                    planificacion[i]=Integer.parseInt(numArray[i]);
+
+                    String datos []=new String[2];
+                    //separamos cada datos para identificar columna y fila, lo retoma el arreglo de enteros.
+                    datos= separar(numArray[i]);
+                    int fil =Integer.parseInt(datos[1]);
+                    int colu=Integer.parseInt(datos[0]);
+
+                    col[i]=fil;
+                    row[i]=colu;
+                    //JOptionPane.showMessageDialog(null,"Entero"+row[i]+"Decimal "+col[i]);
+                }
+
+                Planificacion plan= new Planificacion();
+                int [] resultFCFS= new int [planificacion.length+1];
+                int [] resultSCAN= new int [planificacion.length+2];
+                int [] resultCSCAN= new int [planificacion.length+3];
+                int [] resultCLOOK= new int [planificacion.length+1];
+                int [] resultSSTF= new int [planificacion.length+1];
+                resultFCFS=plan.FCFS(planificacion, cabeza);
+                resultSCAN=plan.SCAN(planificacion, cabeza, arriba, cantidad);
+                resultCSCAN=plan.CSCAN(planificacion, cabeza, arriba, cantidad);
+                resultCLOOK=plan.CLOOK(planificacion, cabeza, arriba, cantidad);
+                resultSSTF=plan.SSTF(planificacion, cabeza);
+                labelFCFS.setText(texto(resultFCFS));
+                labelSCAN.setText(texto(resultSCAN));
+                labelCSCAN.setText(texto(resultCSCAN));
+                labelCLOOK.setText(texto(resultCLOOK));
+                labelSSTF.setText(texto(resultSSTF));
+                labelFCFS.setEnabled(true);
+                labelSCAN.setEnabled(true);
+                labelCSCAN.setEnabled(true);
+                labelCLOOK.setEnabled(true);
+                labelSSTF.setEnabled(true);
+
+                rellenarTabla(resultFCFS,resultSCAN,resultCSCAN,resultCLOOK,resultSSTF);
+
+                /*COMENTADO SIRVE *************************************
+                TestGrid02 prueba = new TestGrid02(filas,row,col);
+                */
+            }
+            else{JOptionPane.showMessageDialog(null,"Existe un dato en cola o puntero que no es aceptado en la capacidad de sectores");
+                jTextField1.setText(null);
+                jTextField2.setText(null);}
+            jTextField3.setText(null);
+        }
+        else {
+            JOptionPane.showMessageDialog(null,"Datos no proporcionados correctamente, revisar el formato");
+            jTextField1.setText(null);
+            jTextField2.setText(null);
+            jTextField3.setText(null);
+
+        }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    public static boolean validar(String cadena,String cadena2,String puntero ){       
+        return cadena.matches("[0-9,]*")& cadena2.matches("[0-9]*")&!cadena.equals("")&!cadena2.equals("")&!puntero.equals("")&puntero.matches("[0-9]*");
     }
-    public static boolean validar2 (String[] cadena, String cadena2 ) {
+    public static boolean validar2 (String[] cadena, String cadena2,String puntero ) {
         int entero=cadena.length; 
         int f;
         int ff= Integer.parseInt(cadena2);
+        int fff=Integer.parseInt(puntero);
         for(int i=0;i<entero;i++)
         { 
             f= Integer.parseInt(cadena[i]);
-            if(f>ff||f==0)
+            if(f>ff||f==0||fff>ff||fff==0)
                 {return false;
                 }
         }
         return true; 
+    }
+    
+    private void rellenarTabla(int [] FCFS,int [] SCAN,int [] CSCAN,int [] CLOOK,int [] SSTF){
+       //PARA AGREGAR LOS DATOS A LA TABLA AUN ME FATA
+      DefaultTableModel modelo= (DefaultTableModel) tablaDatos.getModel();
+      Object [] fila1=new Object[5];
+      
+      fila1[0]=promedio(FCFS);        
+      fila1[1]=promedio(SCAN);
+      fila1[2]=promedio(CSCAN);
+      fila1[3]=promedio(CLOOK);
+      fila1[4]=promedio(SSTF);      
+      modelo.addRow(fila1);
+      this.tablaDatos.setModel(modelo);    }
+    
+    private int promedio(int[] arreglo){
+    int suma=0;
+    int diferencia=0;
+    
+        for(int i=0;i<arreglo.length;i++){
+            if(!(i==arreglo.length-1)){
+            diferencia=Math.abs(arreglo[i]-arreglo[i+1]);
+            suma=suma+diferencia; 
+            }
+        }
+        return (suma/(arreglo.length-1));
+    }
+    
+    private String texto(int[] arreglo){
+        String cadena="{";
+        for(int i=0;i<arreglo.length;i++)
+        {
+            if(!(i==arreglo.length-1)){
+            cadena=cadena+Integer.toString(arreglo[i])+",";
+            }
+            else{
+                cadena=cadena+Integer.toString(arreglo[i]);
+            }
+        }
+        cadena=cadena+"}";
+        return cadena; 
     }
     
     public static String[] separar(String x){
@@ -460,22 +634,42 @@ public class form_algoritmo_planificacion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel0;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JLabel labelCLOOK;
+    private javax.swing.JLabel labelCSCAN;
+    private javax.swing.JLabel labelFCFS;
+    private javax.swing.JLabel labelSCAN;
+    private javax.swing.JLabel labelSSTF;
+    private javax.swing.JTable tablaDatos;
     // End of variables declaration//GEN-END:variables
 }
