@@ -351,15 +351,15 @@ public class form_algoritmo_planificacion extends javax.swing.JFrame {
                     .addComponent(jLabel14)
                     .addComponent(labelCSCAN))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(labelSCAN))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelSCAN)
+                    .addComponent(jLabel13))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
                     .addComponent(labelCLOOK))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel16)
                     .addComponent(labelSSTF))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -461,6 +461,8 @@ public class form_algoritmo_planificacion extends javax.swing.JFrame {
                 filas= Integer.parseInt(cadena2)/100;
                 cabeza=Integer.parseInt(puntero);
                 cantidad=Integer.parseInt(cadena2);
+              
+                
                 for (int i=0;i<tamaño;i++) {
                     planificacion[i]=Integer.parseInt(numArray[i]);
 
@@ -498,15 +500,16 @@ public class form_algoritmo_planificacion extends javax.swing.JFrame {
                 labelSSTF.setEnabled(true);
 
                 rellenarTabla(resultFCFS,resultSCAN,resultCSCAN,resultCLOOK,resultSSTF);
-
-                /*COMENTADO SIRVE *************************************
+                
                 TestGrid02 prueba = new TestGrid02(filas,row,col);
+                /*COMENTADO SIRVE *************************************
+                
                 */
             }
             else{JOptionPane.showMessageDialog(null,"Existe un dato en cola o puntero que no es aceptado en la capacidad de sectores");
                 jTextField1.setText(null);
                 jTextField2.setText(null);}
-            jTextField3.setText(null);
+                jTextField3.setText(null);
         }
         else {
             JOptionPane.showMessageDialog(null,"Datos no proporcionados correctamente, revisar el formato");

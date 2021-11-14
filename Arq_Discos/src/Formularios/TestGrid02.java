@@ -34,7 +34,7 @@ public class TestGrid02 {
 
                 //TestPane testpane=new TestPane();
                 JFrame frame = new JFrame("Testing");
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+               //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setSize(840,560);
                 frame.setLayout(new BorderLayout());                                
                 frame.add(new TestPane(filas,fil,colum));
@@ -69,13 +69,16 @@ public class TestGrid02 {
                     Border border = null;
                     border = new MatteBorder(1, 1, 1, 1, Color.GRAY);
                      
-                    for (int p=0;p<x;p++){                        
-                    if (row==fil[p]&col==colu[p]){                        
+                    for (int p=0;p<x;p++){ 
+                      
+                    if (row==fil[p]&col==colu[p]){
                         cellPane.setBackground(Color.BLUE);
                         //JOptionPane.showMessageDialog(null,"solo estamos configurando..");                        
                     }
+                        
                     
                     }
+                   
                     cellPane.setBorder(border);
                     add(cellPane, gbc);
                     

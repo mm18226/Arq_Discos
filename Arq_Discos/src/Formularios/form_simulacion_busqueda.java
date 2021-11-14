@@ -263,7 +263,7 @@ public class form_simulacion_busqueda extends javax.swing.JFrame {
                     try{
                 for (int col = 0; col < datosFB.cantS; col++) {
                     
-                        Thread.sleep(150);
+                        Thread.sleep(10);
                         gbc.gridx = col;
                         gbc.gridy = row;
 
@@ -300,7 +300,7 @@ public class form_simulacion_busqueda extends javax.swing.JFrame {
                             if(col==datosFB.cantS-1){
                                 cellPane.setBackground(Color.RED);
                                 
-                                col=-1;
+                                col=-2;
                                 cambio=true;
                             }
                             }   
@@ -366,7 +366,7 @@ public class form_simulacion_busqueda extends javax.swing.JFrame {
                     try{
                 for (int col = 0; col < datosFB.cantS; col++) {
                     
-                        Thread.sleep(150);
+                        Thread.sleep(50);
                         gbc.gridx = col;
                         gbc.gridy = row;
 
@@ -403,7 +403,7 @@ public class form_simulacion_busqueda extends javax.swing.JFrame {
                                 
                             }else{
                                 if(col==datosFB.cantS-1){
-                                col=-1;
+                                col=-2;
                                  encontrados=true;
                             }
                                 lblDatosP2.setText("Mientras la cabeza R/W pasaba del cilindro "+datosFB.cD1+" al "+datosFB.cD2+" se recorrieron "+datosFB.secD1Mov+" sectores");
@@ -432,7 +432,7 @@ public class form_simulacion_busqueda extends javax.swing.JFrame {
                                 lblPivote.setText(""+col);
                             }else{
                                 if(col==datosFB.cantS-1){
-                                col=-1;
+                                col=-2;
                                  encontrados=true;
                             }
                                 lblDatosP2.setText("Mientras la cabeza R/W pasaba del cilindro "+datosFB.cD1+" al "+datosFB.cD2+" se recorrieron "+datosFB.secD1Mov+" sectores"+"(VERDE)");
@@ -469,7 +469,7 @@ public class form_simulacion_busqueda extends javax.swing.JFrame {
                                 lblPivote.setText(""+col);
                             }else{
                                 if(col==datosFB.cantS-1){
-                                col=-1;
+                                col=-2;
                                  encontrados=true;
                             }
                                 lblDatosP2.setText("Mientras la cabeza R/W pasaba del cilindro "+datosFB.cD1+" al "+datosFB.cD2+" se recorrieron "+datosFB.secD1Mov+" sectores"+"(VERDE)");
@@ -498,7 +498,7 @@ public class form_simulacion_busqueda extends javax.swing.JFrame {
                                 
                             }else{
                                 if(col==datosFB.cantS-1){
-                                col=-1;
+                                col=-2;
                                  encontrados=true;
                             }
                                 lblDatosP2.setText("Mientras la cabeza R/W pasaba del cilindro "+datosFB.cD1+" al "+datosFB.cD2+" se recorrieron "+datosFB.secD1Mov+" sectores");
