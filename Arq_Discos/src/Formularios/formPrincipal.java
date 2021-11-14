@@ -6,6 +6,7 @@
 package Formularios;
 
 import java.awt.Color;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -18,6 +19,7 @@ public class formPrincipal extends javax.swing.JFrame {
      */
     public formPrincipal() {
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/Iconos/diskIcon.png")).getImage());
     }
 
     /**
@@ -73,13 +75,12 @@ public class formPrincipal extends javax.swing.JFrame {
             }
         });
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 250, 50));
-        jLabel2.getAccessibleContext().setAccessibleName("Algoritmo planificación");
 
         jLabel10.setBackground(new java.awt.Color(83, 187, 180));
         jLabel10.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel10.setText("DiscosXD");
+        jLabel10.setText("Selección de opciones");
         jLabel10.setOpaque(true);
         jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 40));
 

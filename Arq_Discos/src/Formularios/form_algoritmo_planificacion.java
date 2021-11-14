@@ -14,6 +14,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -35,6 +36,7 @@ public class form_algoritmo_planificacion extends javax.swing.JFrame {
      */
     public form_algoritmo_planificacion() {
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/Iconos/diskIcon.png")).getImage());
         buttonGroup1.add(jRadioButton1);
         buttonGroup1.add(jRadioButton2);
     }
@@ -98,7 +100,7 @@ public class form_algoritmo_planificacion extends javax.swing.JFrame {
         jLabel0.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
         jLabel0.setForeground(new java.awt.Color(255, 255, 255));
         jLabel0.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel0.setText("DiscosXD");
+        jLabel0.setText("Selección de opciones");
         jLabel0.setOpaque(true);
         jPanel2.add(jLabel0, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 40));
 
