@@ -245,22 +245,21 @@
                                   </Group>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="1" attributes="0">
-                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                              <Component id="lblDatosP1" min="-2" pref="582" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Component id="mostrarPista1" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="mostrarPista2" alignment="0" max="32767" attributes="0"/>
-                                      </Group>
-                                  </Group>
                                   <Group type="102" alignment="1" attributes="0">
                                       <EmptySpace pref="27" max="32767" attributes="0"/>
                                       <Component id="lblDatosP2" min="-2" pref="606" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="mostrarPista1" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="mostrarPista2" alignment="0" max="32767" attributes="0"/>
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <Component id="lblDatosP1" min="-2" pref="623" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
                                   </Group>
                               </Group>
                           </Group>
@@ -277,15 +276,15 @@
                           <Component id="progressB" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblPivote" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Component id="lblProcesoAct" min="-2" pref="19" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                               <Component id="jScrollPane2" min="-2" pref="67" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="lblUH" pref="15" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblUH" max="32767" attributes="0"/>
                                   <Component id="lblDatosP1" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
@@ -293,7 +292,7 @@
                                   <Component id="mostrarCabeza" min="-2" max="-2" attributes="0"/>
                                   <Component id="mostrarPista1" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="lblUC" min="-2" pref="15" max="-2" attributes="0"/>
                                   <Component id="lblDatosP2" min="-2" pref="20" max="-2" attributes="0"/>
@@ -319,7 +318,7 @@
                               <Component id="lblResultado" min="-2" pref="15" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -432,6 +431,9 @@
               </Layout>
             </Container>
             <Component class="javax.swing.JLabel" name="lblDatosP1">
+              <Properties>
+                <Property name="autoscrolls" type="boolean" value="true"/>
+              </Properties>
             </Component>
             <Container class="javax.swing.JPanel" name="mostrarPista2">
 
