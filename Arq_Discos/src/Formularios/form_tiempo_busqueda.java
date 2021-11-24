@@ -7,6 +7,7 @@ package Formularios;
 
 import java.awt.Color;
 import java.text.DecimalFormat;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,6 +21,7 @@ public class form_tiempo_busqueda extends javax.swing.JFrame {
      */
     public form_tiempo_busqueda() {
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/Iconos/diskIcon.png")).getImage());
 
     }
     
@@ -36,7 +38,7 @@ public class form_tiempo_busqueda extends javax.swing.JFrame {
     public static int cD1=0,cD2=0,resD1=0,resD2=0,tBP=0,tB=0,cantSR=0,secD1Mov=0,secXR=0,totSecR=0,secRest=0,cantVueltas=0;
     public static double x=0,tR=0,tTotRS=0,tTotD1D2=0;
     //conocer si es un dato RPM o RPS
-    public static boolean rpsT=false;
+    public static boolean rpsT;
     
     
     /**
@@ -89,7 +91,7 @@ public class form_tiempo_busqueda extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("DiscosXD");
+        jLabel2.setText("Selección de opciones");
         jLabel2.setOpaque(true);
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 40));
 
@@ -168,6 +170,7 @@ public class form_tiempo_busqueda extends javax.swing.JFrame {
         jLabel7.setText("Velocidad de giro*:");
 
         bGVelR.add(rBRPM);
+        rBRPM.setSelected(true);
         rBRPM.setText("RPM");
         rBRPM.setName("radBRPM"); // NOI18N
         rBRPM.addActionListener(new java.awt.event.ActionListener() {
@@ -390,10 +393,12 @@ public class form_tiempo_busqueda extends javax.swing.JFrame {
         int secCIfM=0;
 
         // asignar un decimalFormat para el tiempo de rotación
-        DecimalFormat df=new DecimalFormat("#.00");
+        DecimalFormat df=new DecimalFormat("#.0000");
         //valida si RPS checkbox fue marcado
         if(rBRPS.isSelected()){
             rpsT=true;
+        }else{
+            rpsT=false;
         }
         //valida si los datos fueron ingresados correctamente
         if(validarTB(cantPD, cantC, velR,dirI,dirF,cantSD,tbD)){
@@ -475,6 +480,7 @@ public class form_tiempo_busqueda extends javax.swing.JFrame {
             if(secRest<secD2){
                 totSecR=secD2-secRest;
                  tTotRS=totSecR*tR;
+            
                 tTotD1D2=tBP+tTotRS;
                // JOptionPane.showMessageDialog(null,"tiempo total de busqueda fue menor: "+tTotD1D2);
             }
@@ -506,7 +512,9 @@ public class form_tiempo_busqueda extends javax.swing.JFrame {
                tTotD1D2=tR;
             }
             }
-                
+               form_simulacion_busqueda form= new form_simulacion_busqueda();
+            form.setVisible(true);
+            dispose(); 
             }//proceso si fue marcado rps
             else{
                 //capturar tiempo de busqueda 

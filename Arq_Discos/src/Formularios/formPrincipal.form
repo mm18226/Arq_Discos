@@ -78,9 +78,6 @@
                 <Property name="text" type="java.lang.String" value="Algoritmo planificaci&#xf3;n"/>
                 <Property name="opaque" type="boolean" value="true"/>
               </Properties>
-              <AccessibilityProperties>
-                <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Algoritmo planificaci&#xf3;n"/>
-              </AccessibilityProperties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel2MouseClicked"/>
                 <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel2MouseEntered"/>
@@ -104,7 +101,7 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="DiscosXD"/>
+                <Property name="text" type="java.lang.String" value="Selecci&#xf3;n de opciones"/>
                 <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <Constraints>

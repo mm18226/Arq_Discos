@@ -80,7 +80,7 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="DiscosXD"/>
+                <Property name="text" type="java.lang.String" value="Selecci&#xf3;n de opciones"/>
                 <Property name="opaque" type="boolean" value="true"/>
               </Properties>
               <Constraints>

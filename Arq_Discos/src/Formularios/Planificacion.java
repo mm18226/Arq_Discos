@@ -194,17 +194,17 @@ public int[] CLOOK (int [] cola,int cabeza, boolean x, int cantidad){
          int [] parte1 = new int [posicion];
          int [] parte2= new int [result.length-posicion];
           parte2[0]=result[posicion];
-          //System.out.println(parte2[0]);
+         // System.out.println(parte2[0]);
            for(int i=1;i<result.length-posicion;i++){
                 parte2[i]=result[posicion+i];
-               // System.out.println(parte2[i]);
+                //System.out.println(parte2[i]);
                 contenedor=i;
            }
            int y=posicion-1; 
            for(int i=0;i<posicion;i++)
            {
-               parte1[i]=result[i];
-              // System.out.println(parte1[i]);
+               parte1[i]=result[y-i];
+              //System.out.println(parte1[i]);
            }
              int fin []= new int[parte1.length+parte2.length];
              System.arraycopy(parte2, 0, fin, 0, parte2.length);
@@ -228,7 +228,7 @@ public int[] CLOOK (int [] cola,int cabeza, boolean x, int cantidad){
                //System.out.println(parte1[i]);
            } 
          for(int i=0;i<result.length-posicion-1;i++){
-                parte2[i]=result[result.length-1-i];
+                parte2[i]=result[posicion+conta+i];
                 //System.out.println(parte2[i]);
                 contenedor=i;
            }
