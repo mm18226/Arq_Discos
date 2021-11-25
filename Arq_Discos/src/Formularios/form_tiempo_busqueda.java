@@ -464,7 +464,7 @@ public class form_tiempo_busqueda extends javax.swing.JFrame {
                 }
                 //realiza ultima resta que no hizo el ciclo for al ser ya menor
                secRest=secCIfM-cantS; 
-               cantVueltas++;
+               //cantVueltas++;
               // JOptionPane.showMessageDialog(null,"ubicacion sector actual"+secD1Mov);
                //Verificar si quedo arriba o abajo del sector de destino
             if(secRest>secD2){
